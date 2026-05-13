@@ -1,0 +1,116 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaFacebook } from 'react-icons/fa';
+
+// Import Logo
+import logo from '../../../public/constructionlogo.png';
+
+const Footer = () => {
+  return (
+    // ✅ Responsive Padding: pt-10 on mobile, pt-16 on desktop
+    <footer className="bg-[#00152e] text-slate-300 pt-10 pb-8 md:pt-16 border-t border-slate-800 font-sans">
+      <div className="container mx-auto px-6">
+
+        {/* ✅ Responsive Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12">
+
+          {/* Column 1: Brand */}
+          <div className="flex flex-col items-start">
+            <Link to="/" className="block mb-6">
+               <img src={logo} alt="Multiverse Intl" className="h-10 md:h-12 w-auto object-contain" />
+            </Link>
+
+            <p className="text-sm leading-relaxed text-slate-400 mb-6">
+              Your trusted partner for reliable trading and contracting solutions in Qatar. Building visions into reality with quality and safety.
+            </p>
+          </div>
+
+          {/* Column 2: Quick Links */}
+          <div>
+            <h4 className="text-white font-bold mb-4 md:mb-6 uppercase tracking-wider text-sm">Quick Links</h4>
+            <ul className="space-y-3 text-sm">
+              <li><Link to="/" className="hover:text-orange-500 transition-colors">Home</Link></li>
+              <li><Link to="/about" className="hover:text-orange-500 transition-colors">About Us</Link></li>
+              <li><Link to="/services" className="hover:text-orange-500 transition-colors">Services</Link></li>
+              <li><Link to="/projects" className="hover:text-orange-500 transition-colors">Projects</Link></li>
+              <li><Link to="/contact" className="hover:text-orange-500 transition-colors">Contact</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 3: Services */}
+          <div>
+            <h4 className="text-white font-bold mb-4 md:mb-6 uppercase tracking-wider text-sm">Our Services</h4>
+            <ul className="space-y-3 text-sm">
+              <li><Link to="/services" className="hover:text-orange-500 transition-colors">Trading & Sourcing</Link></li>
+              <li><Link to="/services" className="hover:text-orange-500 transition-colors">Civil Contracting</Link></li>
+              <li><Link to="/services" className="hover:text-orange-500 transition-colors">MEP Works</Link></li>
+              <li><Link to="/services" className="hover:text-orange-500 transition-colors">Fit-out & Finishing</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 4: Contact */}
+          <div>
+            <h4 className="text-white font-bold mb-4 md:mb-6 uppercase tracking-wider text-sm">Contact Us</h4>
+            <ul className="space-y-4 text-sm">
+              
+              {/* ✅ LOCATION LINK */}
+              <li className="flex items-start gap-3">
+                <FaMapMarkerAlt className="text-orange-500 mt-1 flex-shrink-0" />
+                <a 
+                  href="https://www.google.com/maps/search/?api=1&query=Doha,+Qatar" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-orange-500 transition-colors"
+                >
+                  Doha, Qatar
+                </a>
+              </li>
+
+              {/* ✅ PHONE LINK */}
+              <li className="flex items-center gap-3">
+                <FaPhoneAlt className="text-orange-500 flex-shrink-0" />
+                <a 
+                  href="tel:+97477329077" 
+                  className="hover:text-orange-500 transition-colors"
+                >
+                  +974 7732 9077
+                </a>
+              </li>
+
+              {/* ✅ EMAIL LINK */}
+              <li className="flex items-center gap-3">
+                <FaEnvelope className="text-orange-500 flex-shrink-0" />
+                <a 
+                  href="mailto:info@multiverseintl.com" 
+                  className="hover:text-orange-500 transition-colors"
+                >
+                  info@multiverseintl.com
+                </a>
+              </li>
+
+            </ul>
+          </div>
+
+        </div>
+
+        {/* ✅ COPYRIGHT BAR */}
+        <div className="border-t border-slate-800 pt-8 text-center text-xs text-slate-500">
+          <p>
+            &copy; {new Date().getFullYear()}{' '}
+            <a
+              href="https://bmtechx.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-orange-500 transition-colors"
+            >
+              BMTechx.in
+            </a>
+            . All Rights Reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
