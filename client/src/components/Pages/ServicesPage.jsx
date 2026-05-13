@@ -38,14 +38,14 @@ const ServicesPage = () => {
       title: "Residential Buildings",
       desc: "We turn the vision of a \"dream home\" into a structural reality. Our services focus on creating bespoke single-family homes that reflect unique lifestyles with high-quality craftsmanship.",
       icon: <FaHome />,
-      image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop"
+      image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=800&auto=format&fit=crop&fm=webp"
     },
     {
       id: "SRV-02",
       title: "Commercial Buildings",
       desc: "Architecture that means business. We design and construct commercial spaces—including offices, retail outlets, and warehouses—that optimize workflow and professional aesthetics.",
       icon: <FaBuilding />,
-      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=800&auto=format&fit=crop&fm=webp"
     },
     {
       id: "SRV-03",
@@ -101,7 +101,7 @@ const ServicesPage = () => {
           className="absolute inset-0 z-0"
         >
           <img
-            src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2072&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1920&auto=format&fit=crop&fm=webp"
             alt="Services Hero"
             className="w-full h-full object-cover opacity-50 grayscale brightness-50"
           />
@@ -175,6 +175,7 @@ const ServicesPage = () => {
                    <img 
                     src={service.image} 
                     alt={service.title} 
+                    loading="lazy"
                     className="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-110 transition-all duration-700"
                    />
                    <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>

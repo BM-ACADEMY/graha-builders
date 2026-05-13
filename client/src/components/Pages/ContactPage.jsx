@@ -85,7 +85,7 @@ const ContactPage = () => {
       <div className="relative w-full h-[350px] md:h-[500px] overflow-hidden flex items-center justify-center bg-black">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2144&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1920&auto=format&fit=crop&fm=webp"
             alt="Contact Hero"
             className="w-full h-full object-cover opacity-40 grayscale brightness-50"
           />

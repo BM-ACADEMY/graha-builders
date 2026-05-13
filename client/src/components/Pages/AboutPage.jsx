@@ -49,7 +49,7 @@ const AboutPage = () => {
           className="absolute inset-0 z-0"
         >
           <img
-            src="https://images.unsplash.com/photo-1541976590-713941681591?q=80&w=2070&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?q=80&w=1920&auto=format&fit=crop&fm=webp"
             alt="Hero Background"
             className="w-full h-full object-cover opacity-50 grayscale brightness-50"
           />
@@ -102,8 +102,9 @@ const AboutPage = () => {
                  className="relative z-10 rounded-sm overflow-hidden shadow-2xl border-4 border-white"
                >
                  <img
-                   src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2072&auto=format&fit=crop"
+                   src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&auto=format&fit=crop&fm=webp"
                    alt="Construction Work"
+                   loading="lazy"
                    className="w-full h-[400px] md:h-[600px] object-cover"
                  />
                </motion.div>

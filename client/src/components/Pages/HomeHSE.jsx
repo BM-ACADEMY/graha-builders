@@ -82,8 +82,9 @@ const HomeHSE = () => {
 
                 <div className="relative z-10 bg-black p-4 rounded-sm shadow-2xl">
                    <img
-                     src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2072&auto=format&fit=crop"
+                     src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&auto=format&fit=crop&fm=webp"
                      alt="Safety Operations"
+                     loading="lazy"
                      className="w-full h-[400px] md:h-[550px] object-cover grayscale brightness-75 hover:grayscale-0 transition-all duration-700"
                    />
                    

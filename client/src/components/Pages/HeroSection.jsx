@@ -56,7 +56,7 @@ const Hero = () => {
 
             {/* Refined Subtext */}
             <p className="text-lg md:text-2xl text-gray-300 mb-10 leading-relaxed max-w-2xl font-light">
-              Graha Builders delivers world-class construction solutions in Qatar. 
+              Graha Builders delivers world-class construction solutions in Tamil Nadu. 
               From massive infrastructure to intricate fit-outs, we build with 
               uncompromising precision and safety.
             </p>

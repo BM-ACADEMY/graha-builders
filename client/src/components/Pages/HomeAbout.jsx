@@ -35,8 +35,9 @@ const HomeAbout = () => {
                 {/* Main Image with Industrial Frame */}
                 <div className="relative z-10 p-4 border border-gray-200 bg-white shadow-2xl rounded-sm">
                    <img
-                     src="https://images.unsplash.com/photo-1541976590-713941681591?q=80&w=2070&auto=format&fit=crop"
+                     src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&auto=format&fit=crop&fm=webp"
                      alt="Graha Builders Legacy"
+                     loading="lazy"
                      className="w-full h-[450px] md:h-[600px] object-cover rounded-sm grayscale hover:grayscale-0 transition-all duration-700"
                    />
                    

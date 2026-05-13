@@ -52,7 +52,7 @@ const QualityPage = () => {
       <div className="relative w-full h-[350px] md:h-[500px] overflow-hidden flex items-center justify-center bg-black">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1920&auto=format&fit=crop&fm=webp"
             alt="HSE Hero"
             className="w-full h-full object-cover opacity-50 grayscale brightness-50"
           />

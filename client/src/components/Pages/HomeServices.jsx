@@ -17,7 +17,7 @@ const HomeServices = () => {
       title: "Residential Buildings",
       desc: "We turn the vision of a \"dream home\" into a structural reality. Our residential construction services focus on creating bespoke single-family homes that reflect the unique lifestyle and personality of the owner.",
       icon: <FaHome />,
-      image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=2070&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1000&auto=format&fit=crop&fm=webp",
       dim: "450m² Avg",
       tag: "RES-DIV"
     },
@@ -26,7 +26,7 @@ const HomeServices = () => {
       title: "Commercial Buildings",
       desc: "Architecture that means business. We design and construct commercial spaces—including offices, retail outlets, and warehouses—that optimize workflow and professional aesthetics.",
       icon: <FaBuilding />,
-      image: "https://images.unsplash.com/photo-1541976590-713941681591?q=80&w=2070&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1541976590-713941681591?q=80&w=1000&auto=format&fit=crop&fm=webp",
       dim: "1250m² Avg",
       tag: "COM-DIV"
     }
@@ -137,6 +137,7 @@ const HomeServices = () => {
                      <img 
                       src={service.image} 
                       alt={service.title} 
+                      loading="lazy"
                       className="w-full h-full object-cover grayscale brightness-50 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-105 transition-all duration-1000"
                      />
                      {/* Measuring Line Overlay */}

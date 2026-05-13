@@ -23,8 +23,8 @@ const AppRoutes = () => {
         element={
           <>
             <Helmet>
-              <title>Graha Builders | Leading Construction Company Qatar</title>
-              <meta name="description" content="Graha Builders provides world-class civil construction, MEP, and project management services in Qatar."/>
+              <title>Graha Builders | Leading Construction Company Tamil Nadu</title>
+              <meta name="description" content="Graha Builders provides world-class civil construction, MEP, and project management services in Tamil Nadu, India."/>
                 <link rel="canonical" href="https://grahabuilders.com/" />
             </Helmet>
 
