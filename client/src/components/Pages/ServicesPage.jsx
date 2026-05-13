@@ -1,18 +1,22 @@
 import React, { useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { FaHardHat, FaTruckLoading, FaCheck } from 'react-icons/fa';
+import { FaHome, FaBuilding, FaPaintRoller, FaTools, FaCity, FaGopuram, FaTint, FaArrowRight, FaDraftingCompass, FaRulerHorizontal } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 
-// --- COMPONENT: Background Pattern ---
-const BlueprintGrid = () => (
-  <div className="absolute inset-0 pointer-events-none overflow-hidden">
-    <div className="absolute inset-0 opacity-[0.03]"
+// --- VECTOR BACKGROUND COMPONENT ---
+const BlueprintBackground = () => (
+  <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+    <motion.div
+      animate={{ backgroundPosition: ["0px 0px", "40px 40px"] }}
+      transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+      className="absolute inset-0 opacity-[0.03]"
       style={{
-        backgroundImage: `linear-gradient(#00224D 1px, transparent 1px), linear-gradient(90deg, #00224D 1px, transparent 1px)`,
-        backgroundSize: '50px 50px'
+        backgroundImage: `linear-gradient(#e4a11e 1px, transparent 1px), linear-gradient(90deg, #e4a11e 1px, transparent 1px)`,
+        backgroundSize: '60px 60px'
       }}
-    ></div>
+    />
+    <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white"></div>
   </div>
 );
 
@@ -21,195 +25,218 @@ const ServicesPage = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Parallax Effect Hooks
   const { scrollY } = useScroll();
   const yHero = useTransform(scrollY, [0, 500], [0, 150]);
   const opacityHero = useTransform(scrollY, [0, 300], [1, 0]);
 
+  // 🎨 BRAND COLORS
+  const primaryColor = "#e4a11e";
+
+  const services = [
+    {
+      id: "SRV-01",
+      title: "Residential Buildings",
+      desc: "We turn the vision of a \"dream home\" into a structural reality. Our services focus on creating bespoke single-family homes that reflect unique lifestyles with high-quality craftsmanship.",
+      icon: <FaHome />,
+      image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2071&auto=format&fit=crop"
+    },
+    {
+      id: "SRV-02",
+      title: "Commercial Buildings",
+      desc: "Architecture that means business. We design and construct commercial spaces—including offices, retail outlets, and warehouses—that optimize workflow and professional aesthetics.",
+      icon: <FaBuilding />,
+      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+    },
+    {
+      id: "SRV-03",
+      title: "Modern Interior Works",
+      desc: "Beauty meets functionality. Our interior team specializes in contemporary design, focusing on clean lines, smart lighting, ergonomic layouts, and high-end finishes.",
+      icon: <FaPaintRoller />,
+      image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop"
+    },
+    {
+      id: "SRV-04",
+      title: "Renovation & Rehabilitation",
+      desc: "Giving new life to existing structures. We bridge the gap between old and new, focusing on structural reinforcement, spatial reconfiguration, and aesthetic upgrades.",
+      icon: <FaTools />,
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=2070&auto=format&fit=crop"
+    },
+    {
+      id: "SRV-05",
+      title: "Apartment Buildings",
+      desc: "High-density living solutions. We manage complex multi-family residential projects, balancing maximized floor-area ratios with modern amenities and communal spaces.",
+      icon: <FaCity />,
+      image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1935&auto=format&fit=crop"
+    },
+    {
+      id: "SRV-06",
+      title: "Traditional Buildings",
+      desc: "Preserving the soul of architecture. We respect classical techniques and local heritage, utilizing authentic materials and time-honored craftsmanship.",
+      icon: <FaGopuram />,
+      image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?q=80&w=2070&auto=format&fit=crop"
+    },
+    {
+      id: "SRV-07",
+      title: "Waterproofing",
+      desc: "Ultimate protection for your investment. We provide advanced waterproofing solutions for roofs, basements, and facades using high-grade membranes and sealants.",
+      icon: <FaTint />,
+      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop"
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-orange-100">
+    <div className="min-h-screen bg-white font-sans text-slate-800 selection:bg-orange-100 overflow-x-hidden">
       <Helmet>
-  <title>Civil, MEP & Fit-Out Services in Qatar</title>
-<meta name="description" content="Explore our civil construction, MEP works, fit-out and trading services in Qatar. Cost-effective, high-quality project solutions."/>
-
-  <link rel="canonical" href="https://multiverseint.com/services" />
-</Helmet>
-
+        <title>Our Services | Graha Builders - Construction Excellence</title>
+        <meta name="description" content="Explore the wide range of construction services offered by Graha Builders, including Residential, Commercial, Interior, Renovation, and more in Tamil Nadu."/>
+        <link rel="canonical" href="https://grahabuilders.com/services" />
+      </Helmet>
 
       {/* ==========================
           SECTION 1: HERO BANNER
       ========================== */}
-      {/* Kept your exact height settings */}
-      <div className="relative w-full h-[250px] md:h-[350px] overflow-hidden flex items-center justify-center">
-        <div
-          className="absolute inset-0 bg-fixed bg-cover bg-center z-0"
-          style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2072&auto=format&fit=crop')"
-          }}
-        >
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-[1px]"></div>
-        </div>
-
+      <div className="relative w-full h-[350px] md:h-[500px] overflow-hidden flex items-center justify-center bg-black">
         <motion.div
           style={{ y: yHero, opacity: opacityHero }}
-          className="relative z-10 text-center px-4"
+          className="absolute inset-0 z-0"
         >
+          <img
+            src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2072&auto=format&fit=crop"
+            alt="Services Hero"
+            className="w-full h-full object-cover opacity-50 grayscale brightness-50"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black"></div>
+        </motion.div>
+
+        <div className="relative z-10 text-center px-4">
           <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1, ease: "easeOut" }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
           >
-            <h1 className="text-4xl md:text-6xl font-heading font-bold text-white tracking-tighter mb-3 drop-shadow-2xl">
-              Our Services
-            </h1>
-            <div className="flex items-center justify-center gap-3">
-               <div className="h-[2px] w-8 md:w-10 bg-orange-500"></div>
-               <span className="text-orange-500 font-bold tracking-[0.2em] uppercase text-xs md:text-sm">What We Do</span>
-               <div className="h-[2px] w-8 md:w-10 bg-orange-500"></div>
+            <div className="flex items-center justify-center gap-4 mb-6">
+               <div className="w-12 h-[1px] bg-[#e4a11e]"></div>
+               <span className="text-[#e4a11e] font-black tracking-[0.5em] uppercase text-xs md:text-sm">Expert Solutions</span>
+               <div className="w-12 h-[1px] bg-[#e4a11e]"></div>
             </div>
+            <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter mb-4 leading-none uppercase">
+              OUR <br />
+              <span style={{ color: primaryColor }}>SERVICES.</span>
+            </h1>
           </motion.div>
+        </div>
+
+        {/* Scroll Indicator Icon */}
+        <motion.div 
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/30 text-xl"
+        >
+           <FaRulerHorizontal />
         </motion.div>
       </div>
 
-
       {/* ==========================
-          SECTION 2: DUAL PILLARS
+          SECTION 2: SERVICES GRID
       ========================== */}
-      {/* Mobile: py-16 | Desktop: py-24 (Unchanged) */}
-      <section className="py-16 md:py-24 relative overflow-hidden bg-slate-50">
-        <BlueprintGrid />
-
+      <section className="py-24 md:py-40 relative">
+        <BlueprintBackground />
+        
         <div className="container mx-auto px-6 relative z-10">
-
-          {/* Intro Text */}
-          <div className="text-center mb-12 md:mb-16 max-w-3xl mx-auto">
-             <h2 className="text-sm font-bold text-orange-600 uppercase tracking-widest mb-3">Core Divisions</h2>
-             <h3 className="text-3xl md:text-4xl font-heading font-bold text-[#00224D]">
-               Comprehensive Solutions
+          
+          {/* Header */}
+          <div className="max-w-3xl mb-20 md:mb-32">
+             <h2 className="text-sm font-bold text-[#e4a11e] uppercase tracking-[0.4em] mb-6">Service Catalog / 2024</h2>
+             <h3 className="text-4xl md:text-6xl font-black text-black leading-tight uppercase tracking-tighter">
+               Comprehensive <br />
+               <span className="italic" style={{ color: primaryColor }}>Construction Wings.</span>
              </h3>
-             <p className="mt-4 text-slate-500 text-sm md:text-base">
-               Delivering excellence through two specialized operational wings.
-             </p>
           </div>
 
-          {/* GRID CONTAINER */}
-          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 lg:gap-10 items-stretch">
-
-            {/* --- CARD 1: TRADING SERVICES --- */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="bg-white rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.08)] border border-slate-200 overflow-hidden flex flex-col h-full hover:shadow-2xl hover:border-orange-200 transition-all duration-500 group"
-            >
-              {/* Header Image Area */}
-              <div className="h-40 md:h-48 bg-orange-50 relative overflow-hidden flex items-center justify-center group-hover:bg-orange-100 transition-colors duration-500">
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-30"></div>
-
-                {/* Floating Icon: Smaller on mobile (w-20), Original on desktop (w-24) */}
-                <div className="w-20 h-20 md:w-24 md:h-24 bg-white rounded-full flex items-center justify-center text-orange-600 text-3xl md:text-4xl shadow-xl border-4 border-white relative z-10 group-hover:scale-110 transition-transform duration-500">
-                  <FaTruckLoading />
+          {/* GRID */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12">
+            {services.map((service, index) => (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.6 }}
+                className="group relative bg-white border border-gray-100 rounded-sm overflow-hidden hover:border-[#e4a11e]/50 transition-all duration-500 shadow-xl hover:shadow-2xl"
+              >
+                {/* Technical Top Bar */}
+                <div className="px-6 py-3 bg-slate-50 border-b border-gray-100 flex justify-between items-center group-hover:bg-[#e4a11e]/10 transition-colors">
+                   <span className="text-[10px] font-mono text-gray-400">{service.id}</span>
+                   <div className="w-10 h-[1px] bg-gray-200"></div>
                 </div>
-              </div>
 
-              {/* Content Container */}
-              {/* Mobile: p-6 | Desktop: p-12 (Unchanged) */}
-              <div className="p-6 md:p-12 flex-grow flex flex-col">
-                <h3 className="text-2xl md:text-3xl font-heading font-bold text-[#00224D] mb-4 text-center group-hover:text-orange-600 transition-colors">
-                  Trading Services
-                </h3>
-                <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-8 text-center">
-                  We supply quality-approved materials sourced from reliable manufacturers. Our focus is on <span className="text-orange-600 font-semibold">timely delivery</span>, compliance, and value for money.
-                </p>
-
-                {/* Checklist Container */}
-                <div className="bg-slate-50 rounded-xl p-5 md:p-6 space-y-4 border border-slate-100 mt-auto">
-                  {[
-                    "Construction & Industrial Materials",
-                    "Project-Specific Supply Coordination",
-                    "Vendor Sourcing & Submittals"
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <FaCheck className="text-orange-500 mt-1 flex-shrink-0" />
-                      <span className="text-slate-700 font-medium text-sm md:text-base">{item}</span>
-                    </div>
-                  ))}
+                {/* Card Image Area */}
+                <div className="h-56 overflow-hidden relative">
+                   <img 
+                    src={service.image} 
+                    alt={service.title} 
+                    className="w-full h-full object-cover grayscale brightness-75 group-hover:grayscale-0 group-hover:brightness-100 group-hover:scale-110 transition-all duration-700"
+                   />
+                   <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                   
+                   {/* Icon Floating */}
+                   <div className="absolute bottom-6 right-6 w-14 h-14 bg-white shadow-2xl flex items-center justify-center text-2xl rounded-sm text-black group-hover:bg-[#e4a11e] group-hover:text-black transition-all transform group-hover:-translate-y-2">
+                      {service.icon}
+                   </div>
                 </div>
-              </div>
-            </motion.div>
 
+                {/* Content Area */}
+                <div className="p-8 md:p-10">
+                  <h4 className="text-2xl font-black text-black mb-4 uppercase tracking-tight group-hover:text-[#e4a11e] transition-colors">
+                    {service.title}
+                  </h4>
+                  <p className="text-gray-500 text-sm md:text-base leading-relaxed mb-8 font-light">
+                    {service.desc}
+                  </p>
 
-            {/* --- CARD 2: CONTRACTING SERVICES --- */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-[#00224D] rounded-2xl shadow-2xl border border-[#1a3a63] overflow-hidden flex flex-col h-full text-white relative group ring-1 ring-white/10"
-            >
-              {/* Header Image Area */}
-              <div className="h-40 md:h-48 bg-[#00152e] relative overflow-hidden flex items-center justify-center group-hover:bg-[#001a36] transition-colors duration-500">
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
-
-                {/* Floating Icon: Smaller on mobile (w-20), Original on desktop (w-24) */}
-                <div className="w-20 h-20 md:w-24 md:h-24 bg-[#00224D] rounded-full flex items-center justify-center text-white text-3xl md:text-4xl shadow-xl border-4 border-[#1a3a63] relative z-10 group-hover:scale-110 transition-transform duration-500 group-hover:border-orange-500">
-                  <FaHardHat />
+                  <div className="flex items-center gap-2 text-black font-bold uppercase tracking-widest text-[10px] group/link">
+                    <span className="pb-1 border-b border-black/10 group-hover/link:border-[#e4a11e] transition-colors">Technical Specs</span>
+                    <FaArrowRight className="group-hover/link:translate-x-2 transition-transform" style={{ color: primaryColor }} />
+                  </div>
                 </div>
-              </div>
 
-              {/* Content Container */}
-              {/* Mobile: p-6 | Desktop: p-12 (Unchanged) */}
-              <div className="p-6 md:p-12 flex-grow flex flex-col relative z-10">
-                <h3 className="text-2xl md:text-3xl font-heading font-bold text-white mb-4 text-center group-hover:text-orange-500 transition-colors">
-                  Contracting Services
-                </h3>
-                <p className="text-slate-300 text-base md:text-lg leading-relaxed mb-8 text-center">
-                  We support projects through structured execution and close coordination. We emphasize <span className="text-orange-500 font-semibold">planning before execution</span> to ensure timelines.
-                </p>
-
-                {/* Checklist Container */}
-                <div className="bg-white/5 rounded-xl p-5 md:p-6 space-y-4 border border-white/10 mt-auto">
-                  {[
-                    "Civil & MEP-related Works",
-                    "Fit-out & Modification Works",
-                    "Small to Mid-scale Construction",
-                    "Site Coordination & Execution"
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <div className="w-5 h-5 rounded-full bg-orange-500 flex items-center justify-center flex-shrink-0 mt-0.5">
-                        <FaCheck className="text-white text-xs" />
-                      </div>
-                      <span className="text-slate-200 font-medium text-sm md:text-base">{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-
+                {/* Bottom Border Decorator */}
+                <div className="absolute bottom-0 left-0 h-1 w-0 bg-[#e4a11e] group-hover:w-full transition-all duration-700"></div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-
       {/* ==========================
-          SECTION 3: CALL TO ACTION
+          SECTION 3: CONTACT CTA
       ========================== */}
-      <section className="bg-white py-16 md:py-20 px-6 border-t border-slate-100">
-          <div className="container mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#00224D] mb-4">
-              Ready to Start?
+      <section className="py-24 bg-black text-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none" 
+             style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, gray 1px, transparent 0)', backgroundSize: '40px 40px' }}>
+        </div>
+        
+        <div className="container mx-auto px-6 text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-5xl font-black mb-8 uppercase tracking-tighter">
+              Ready to <span style={{ color: primaryColor }}>Build Your Legacy?</span>
             </h2>
-            <p className="text-slate-500 mb-8 max-w-2xl mx-auto text-sm md:text-base">
-              Whether you need material supply or site execution, our team is ready to assist.
+            <p className="text-gray-400 mb-12 max-w-2xl mx-auto text-lg font-light leading-relaxed">
+              Whether it's a traditional home or a modern commercial hub, our team is ready to deliver excellence from plan to finish.
             </p>
-            <Link
-              to="/contact"
-              className="inline-block bg-orange-600 text-white px-8 py-3 md:px-10 md:py-4 rounded-lg font-bold shadow-lg hover:bg-orange-700 hover:shadow-orange-500/30 transition-all transform hover:-translate-y-1"
+            <Link 
+              to="/contact" 
+              className="inline-flex items-center gap-6 px-12 py-5 bg-[#e4a11e] text-black font-black uppercase tracking-[0.3em] text-sm hover:bg-white transition-all transform hover:-translate-y-1"
             >
-              Get a Free Quote
+              Get a Free Consultation
+              <FaArrowRight />
             </Link>
-          </div>
+          </motion.div>
+        </div>
       </section>
 
     </div>

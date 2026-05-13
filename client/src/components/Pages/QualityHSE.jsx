@@ -1,184 +1,179 @@
 import React, { useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { FaClipboardCheck, FaUserCheck, FaShieldAlt, FaChartLine } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { FaClipboardCheck, FaUserCheck, FaShieldAlt, FaChartLine, FaDraftingCompass, FaHardHat } from 'react-icons/fa';
 import { Helmet } from "react-helmet";
 
 // --- DATA ---
 const commitments = [
   {
-    id: 1,
+    id: "HSE-01",
     title: "Strict Compliance",
     icon: <FaClipboardCheck />,
-    desc: "Compliance with approved drawings and specifications."
+    desc: "Unwavering compliance with approved architectural drawings and technical specifications."
   },
   {
-    id: 2,
+    id: "HSE-02",
     title: "Qualified Resources",
     icon: <FaUserCheck />,
-    desc: "Use of qualified manpower and approved materials."
+    desc: "Strategic deployment of qualified manpower and certified construction materials."
   },
   {
-    id: 3,
+    id: "HSE-03",
     title: "Safety First",
     icon: <FaShieldAlt />,
-    desc: "Safe working practices aligned with local regulations."
+    desc: "Proactive safety protocols aligned with local Tamil Nadu building regulations."
   },
   {
-    id: 4,
-    title: "Continuous Improvement",
+    id: "HSE-04",
+    title: "Continuous Monitoring",
     icon: <FaChartLine />,
-    desc: "Continuous monitoring and improvement of site activities."
+    desc: "Real-time monitoring and systematic improvement of site activities and engineering standards."
   }
 ];
-
-// --- ANIMATION VARIANTS ---
-
-// 1. Container: Controls the timing of children
-const containerVariants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.4, // ✅ Wait 0.4s between each card
-      delayChildren: 0.2
-    }
-  }
-};
-
-// 2. Card: The actual animation logic
-const cardVariants = {
-  hidden: { 
-    opacity: 0, 
-    y: 50 
-  },
-  show: { 
-    opacity: 1, 
-    y: 0,
-    transition: { 
-      type: "spring", 
-      stiffness: 50, 
-      damping: 20 
-    }
-  }
-};
 
 const QualityPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const { scrollY } = useScroll();
-  const yHero = useTransform(scrollY, [0, 500], [0, 150]);
-  const opacityHero = useTransform(scrollY, [0, 300], [1, 0]);
+  const primaryColor = "#e4a11e";
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-orange-100 relative">
+    <div className="min-h-screen bg-white font-sans text-slate-800 selection:bg-orange-100 overflow-x-hidden">
       <Helmet>
-      <title>Contact Multiverse Trading Qatar</title>
-<meta name="description" content="Contact Multiverse Trading & Contracting in Qatar for civil, MEP and fit-out services. Get expert project consultation today."/>
+        <title>Quality & HSE | Graha Builders - Standards of Excellence</title>
+        <meta name="description" content="Graha Builders is committed to the highest standards of Quality, Health, Safety, and Environment in all our construction projects across Tamil Nadu."/>
+        <link rel="canonical" href="https://grahabuilders.com/hse" />
+      </Helmet>
 
-      <link rel="canonical" href="https://multiverseint.com/hse" />
-    </Helmet>
-
-      {/* HERO SECTION */}
-      <div className="relative w-full h-[250px] md:h-[350px] overflow-hidden flex items-center justify-center">
-        <div
-          className="absolute inset-0 bg-fixed bg-cover bg-center z-0"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop')" }}
-        >
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-[1px]"></div>
+      {/* ==========================
+          SECTION 1: PREMIUM HERO
+      ========================== */}
+      <div className="relative w-full h-[350px] md:h-[500px] overflow-hidden flex items-center justify-center bg-black">
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop"
+            alt="HSE Hero"
+            className="w-full h-full object-cover opacity-50 grayscale brightness-50"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black"></div>
         </div>
 
-        <motion.div
-          style={{ y: yHero, opacity: opacityHero }}
-          className="relative z-10 text-center px-4"
-        >
+        <div className="relative z-10 text-center px-4">
           <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1, ease: "easeOut" }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
           >
-            <h1 className="text-3xl md:text-6xl font-heading font-bold text-white tracking-tighter mb-3 drop-shadow-2xl">
-              Quality & HSE
-            </h1>
-            <div className="flex items-center justify-center gap-3">
-               <div className="h-[2px] w-8 md:w-10 bg-orange-500"></div>
-               <span className="text-orange-500 font-bold tracking-[0.2em] uppercase text-xs md:text-sm">Safety & Standards</span>
-               <div className="h-[2px] w-8 md:w-10 bg-orange-500"></div>
+            <div className="flex items-center justify-center gap-4 mb-6">
+               <div className="w-12 h-[1px] bg-[#e4a11e]"></div>
+               <span className="text-[#e4a11e] font-black tracking-[0.5em] uppercase text-xs">Compliance Standards</span>
+               <div className="w-12 h-[1px] bg-[#e4a11e]"></div>
             </div>
+            <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter mb-4 leading-none uppercase">
+              QUALITY <br />
+              <span style={{ color: primaryColor }}>& SAFETY.</span>
+            </h1>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
 
-      {/* COMMITMENT SECTION */}
-      <section className="py-16 md:py-24 px-4 md:px-6 relative">
-        <div className="absolute inset-0 pointer-events-none opacity-[0.03]"
-          style={{
-             backgroundImage: `linear-gradient(#00224D 1px, transparent 1px), linear-gradient(90deg, #00224D 1px, transparent 1px)`,
-             backgroundSize: '40px 40px'
-          }}
-        ></div>
-
-        <div className="container mx-auto relative z-10">
-           <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
-             <motion.h2 
-               initial={{ opacity: 0, y: 20 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               viewport={{ once: true }}
-               transition={{ duration: 0.6 }}
-               className="text-2xl md:text-4xl font-heading font-bold text-[#00224D] mb-4 md:mb-6"
-             >
-               Commitment to Quality & HSE
-             </motion.h2>
-             <motion.p 
-               initial={{ opacity: 0, y: 20 }}
-               whileInView={{ opacity: 1, y: 0 }}
-               viewport={{ once: true }}
-               transition={{ duration: 0.6, delay: 0.2 }}
-               className="text-slate-600 text-sm md:text-lg leading-relaxed px-2"
-             >
-               <span className="font-bold text-[#00224D]">Multiverse International Trading & Contracting</span> is committed to maintaining high standards of quality, health, safety, and environmental responsibility.
-             </motion.p>
-           </div>
-
-           {/* ✅ PARENT CONTAINER CONTROLS THE ANIMATION SEQUENCE */}
-           <motion.div 
-             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-             variants={containerVariants}
-             initial="hidden"
-             whileInView="show"
-             viewport={{ once: true, amount: 0.1 }} // Starts when 10% of grid is visible
-           >
-             {commitments.map((item) => (
-               <motion.div
-                 key={item.id}
-                 // ✅ Child simply inherits "hidden" or "show" from parent
-                 variants={cardVariants} 
-                 className="group relative bg-white rounded-xl p-6 md:p-8 shadow-lg border border-slate-100 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2"
-               >
-                 <div className="h-full flex flex-col items-center text-center">
-                   
-                   {/* Icon */}
-                   <div className="w-14 h-14 md:w-16 md:h-16 mx-auto bg-slate-50 rounded-full flex items-center justify-center text-2xl md:text-3xl text-[#00224D] mb-4 md:mb-6 group-hover:bg-[#00224D] group-hover:text-white transition-colors duration-300 shadow-inner">
-                     {item.icon}
+      {/* ==========================
+          SECTION 2: POLICY STATEMENT
+      ========================== */}
+      <section className="py-24 md:py-40 relative">
+        <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none"
+             style={{ 
+               backgroundImage: `linear-gradient(${primaryColor} 1px, transparent 1px), linear-gradient(90deg, ${primaryColor} 1px, transparent 1px)`,
+               backgroundSize: '60px 60px' 
+             }}>
+        </div>
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="flex flex-col lg:flex-row gap-20 items-center max-w-6xl mx-auto">
+             
+             <div className="w-full lg:w-1/2">
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                >
+                   <div className="flex items-center gap-4 mb-8">
+                     <FaDraftingCompass className="text-2xl text-[#e4a11e]" />
+                     <span className="text-gray-400 font-bold uppercase tracking-[0.3em] text-xs">Policy Index: QB-HSE-01</span>
                    </div>
+                   <h2 className="text-4xl md:text-6xl font-black text-black mb-10 leading-tight tracking-tighter uppercase">
+                     Our Commitment to <br />
+                     <span className="italic" style={{ color: primaryColor }}>Absolute Excellence.</span>
+                   </h2>
+                   <div className="space-y-6 text-gray-600 text-lg md:text-xl font-light leading-relaxed">
+                      <p>
+                        At <span className="text-black font-black">Graha Builders</span>, quality is not just a checkbox—it is the foundation of our engineering identity. We believe that every structural project must be safe, sustainable, and built to endure.
+                      </p>
+                      <p>
+                        We maintain high standards of quality, health, safety, and environmental responsibility by strictly following approved specifications, local regulations, and safe working practices across all operations in Tamil Nadu.
+                      </p>
+                   </div>
+                </motion.div>
+             </div>
 
-                   {/* Title */}
-                   <h3 className="text-lg md:text-xl font-bold text-[#00224D] mb-3 group-hover:text-orange-600 transition-colors">
-                     {item.title}
-                   </h3>
-
-                   {/* Description */}
-                   <p className="text-slate-500 text-xs md:text-sm leading-relaxed">
-                     {item.desc}
+             <div className="w-full lg:w-1/2">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  className="relative p-10 md:p-16 bg-black text-white rounded-sm shadow-2xl"
+                >
+                   <FaHardHat className="text-5xl mb-8 text-[#e4a11e]" />
+                   <h3 className="text-2xl font-black uppercase tracking-widest mb-6">Zero-Accident Mindset</h3>
+                   <p className="text-gray-400 text-lg leading-relaxed font-light mb-10">
+                      Our safety culture is built on the principle of "Planning before Execution." Every site operation is audited to ensure the well-being of our team and the integrity of the project.
                    </p>
-                 </div>
-               </motion.div>
-             ))}
-           </motion.div>
+                   <div className="h-1 w-20 bg-[#e4a11e]"></div>
+                </motion.div>
+             </div>
 
+          </div>
         </div>
       </section>
+
+      {/* ==========================
+          SECTION 3: CORE PILLARS
+      ========================== */}
+      <section className="py-24 md:py-40 bg-slate-50 relative overflow-hidden">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+             {commitments.map((item, index) => (
+               <motion.div
+                 key={item.id}
+                 initial={{ opacity: 0, y: 30 }}
+                 whileInView={{ opacity: 1, y: 0 }}
+                 viewport={{ once: true }}
+                 transition={{ delay: index * 0.1 }}
+                 className="bg-white p-8 md:p-10 border border-gray-100 hover:border-[#e4a11e] transition-all duration-500 group shadow-lg hover:shadow-2xl"
+               >
+                  <span className="text-[10px] font-mono text-gray-400 mb-6 block uppercase tracking-widest">{item.id}</span>
+                  <div className="text-3xl mb-8 text-[#e4a11e] group-hover:scale-110 transition-transform origin-left">
+                     {item.icon}
+                  </div>
+                  <h4 className="text-xl font-black text-black mb-4 uppercase tracking-tight">{item.title}</h4>
+                  <p className="text-sm text-gray-500 leading-relaxed font-light">{item.desc}</p>
+                  
+                  {/* Decorative Dot */}
+                  <div className="mt-8 w-2 h-2 rounded-full bg-gray-100 group-hover:bg-[#e4a11e] transition-colors"></div>
+               </motion.div>
+             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FINAL STATEMENT */}
+      <section className="py-20 bg-white border-t border-gray-100 text-center">
+         <h4 className="text-2xl md:text-4xl font-black text-black uppercase tracking-tighter mb-4">Quality without Compromise. Safety without Shortcuts.</h4>
+         <div className="w-16 h-1 bg-[#e4a11e] mx-auto mb-8"></div>
+         <p className="text-gray-400 font-bold uppercase tracking-[0.5em] text-[10px]">The Graha Standard / HSE Compliance</p>
+      </section>
+
     </div>
   );
 };

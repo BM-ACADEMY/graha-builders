@@ -1,54 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaWhatsapp, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaCheckCircle, FaExclamationCircle, FaDraftingCompass, FaClock, FaInstagram } from 'react-icons/fa';
 import axios from 'axios';
 import { Helmet } from "react-helmet";
 
-
-// --- COMPONENT: Background Pattern ---
-const BlueprintGrid = () => (
-  <div className="absolute inset-0 pointer-events-none overflow-hidden">
-    <div className="absolute inset-0 opacity-[0.03]"
-      style={{
-        backgroundImage: `linear-gradient(#00224D 1px, transparent 1px), linear-gradient(90deg, #00224D 1px, transparent 1px)`,
-        backgroundSize: '40px 40px'
-      }}
-    ></div>
-  </div>
-);
-
-// --- ANIMATION VARIANTS ---
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2, // Delays each child by 0.2s
-      delayChildren: 0.1
-    }
-  }
-};
-
-const cardVariants = {
-  hidden: { y: 50, opacity: 0 },
-  visible: { 
-    y: 0, 
-    opacity: 1,
-    transition: { type: "spring", stiffness: 100, damping: 12 }
-  }
-};
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 60 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { duration: 0.6, ease: "easeOut" } 
-  }
-};
-
 const ContactPage = () => {
   const API_URL = import.meta.env.VITE_API_URL;
+  const primaryColor = "#e4a11e";
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -64,15 +22,40 @@ const ContactPage = () => {
   const [status, setStatus] = useState({ loading: false, success: false, error: '' });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    
+    if (name === 'phone') {
+      // Validate: Numbers only and max 10 length
+      const numericValue = value.replace(/\D/g, '').slice(0, 10);
+      setFormData(prev => ({ ...prev, [name]: numericValue }));
+    } else if (name === 'email') {
+      // Force lowercase for email
+      setFormData(prev => ({ ...prev, [name]: value.toLowerCase() }));
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Final Email Validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setStatus({ loading: false, success: false, error: 'Please enter a valid email address.' });
+      return;
+    }
+
+    // Phone Length Validation
+    if (formData.phone.length !== 10) {
+      setStatus({ loading: false, success: false, error: 'Phone number must be exactly 10 digits.' });
+      return;
+    }
+
     setStatus({ loading: true, success: false, error: '' });
 
     try {
-      const response = await axios.post(`${API_URL}/construction/multiverse-construction-email`, formData);
+      const response = await axios.post(`${API_URL}/graha-builders/send-email`, formData);
       if (response.data.success) {
         setStatus({ loading: false, success: true, error: '' });
         setFormData({ name: '', phone: '', email: '', message: '' });
@@ -83,203 +66,233 @@ const ContactPage = () => {
       setStatus({
         loading: false,
         success: false,
-        error: err.response?.data?.message || "Failed to send message."
+        error: err.response?.data?.message || "Failed to send message. Please try again."
       });
     }
   };
 
-  // Parallax Setup
-  const { scrollY } = useScroll();
-  const yHero = useTransform(scrollY, [0, 500], [0, 150]);
-  const opacityHero = useTransform(scrollY, [0, 300], [1, 0]);
-
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-800 selection:bg-orange-100 relative">
+    <div className="min-h-screen bg-white font-sans text-slate-800 selection:bg-orange-100 overflow-x-hidden">
       <Helmet>
-  <title>Contact Us | Multiverse International Trading & Contracting Qatar</title>
-  <meta
-    name="description"
-    content="Contact Multiverse International Trading & Contracting for trading and contracting services in Qatar. Get project consultation and support from our experts."
-  />
-  <link rel="canonical" href="https://multiverseint.com/contact" />
-</Helmet>
+        <title>Contact Us | Graha Builders - Civil Engineering & Construction</title>
+        <meta name="description" content="Get in touch with Graha Builders for expert civil construction, interior design, and engineering consultation in Tamil Nadu."/>
+        <link rel="canonical" href="https://grahabuilders.com/contact" />
+      </Helmet>
 
-
-      {/* HERO BANNER */}
-      <div className="relative w-full h-[250px] md:h-[350px] overflow-hidden flex items-center justify-center">
-        <div className="absolute inset-0 bg-fixed bg-cover bg-center z-0" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2144&auto=format&fit=crop')" }}>
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-[1px]"></div>
+      {/* ==========================
+          SECTION 1: PREMIUM HERO
+      ========================== */}
+      <div className="relative w-full h-[350px] md:h-[500px] overflow-hidden flex items-center justify-center bg-black">
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=2144&auto=format&fit=crop"
+            alt="Contact Hero"
+            className="w-full h-full object-cover opacity-40 grayscale brightness-50"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black"></div>
         </div>
-        <motion.div style={{ y: yHero, opacity: opacityHero }} className="relative z-10 text-center px-4">
-          <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 1 }}>
-            <h1 className="text-4xl md:text-6xl font-heading font-bold text-white tracking-tighter mb-3 drop-shadow-2xl">Contact Us</h1>
-            <div className="flex items-center justify-center gap-3">
-               <div className="h-[2px] w-10 bg-orange-500"></div>
-               <span className="text-orange-500 font-bold tracking-[0.2em] uppercase text-xs md:text-sm">Multiverse International</span>
-               <div className="h-[2px] w-10 bg-orange-500"></div>
+
+        <div className="relative z-10 text-center px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <div className="flex items-center justify-center gap-4 mb-6">
+               <div className="w-12 h-[1px] bg-[#e4a11e]"></div>
+               <span className="text-[#e4a11e] font-black tracking-[0.5em] uppercase text-xs">Technical Support</span>
+               <div className="w-12 h-[1px] bg-[#e4a11e]"></div>
             </div>
+            <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter mb-4 leading-none uppercase">
+              GET IN <br />
+              <span style={{ color: primaryColor }}>TOUCH.</span>
+            </h1>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
 
-      {/* CONTACT INFO CARDS (Staggered Animation) */}
-      <section className="py-20 px-6 relative z-10 -mt-10">
-        <div className="container mx-auto">
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid md:grid-cols-3 gap-6"
-          >
+      {/* ==========================
+          SECTION 2: CONTACT GRID
+      ========================== */}
+      <section className="py-24 md:py-40 relative">
+        <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none"
+             style={{ 
+               backgroundImage: `linear-gradient(${primaryColor} 1px, transparent 1px), linear-gradient(90deg, ${primaryColor} 1px, transparent 1px)`,
+               backgroundSize: '60px 60px' 
+             }}>
+        </div>
 
-            {/* Phone */}
-<motion.div variants={cardVariants} 
-  className="bg-white p-8 rounded-xl shadow-lg border border-slate-100 hover:border-orange-500 transition-all duration-300 hover:shadow-2xl group flex flex-col items-start">
-  <div className="w-12 h-12 bg-orange-50 text-orange-600 rounded-full flex items-center justify-center text-xl mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
-    <FaPhoneAlt />
-  </div>
-  <h3 className="text-lg font-bold text-[#00224D] uppercase tracking-wider mb-2">Call Us</h3>
-  {/* UPDATED STYLE BELOW */}
-  <p className="text-slate-400 text-xs font-bold uppercase tracking-[0.15em] mb-4">Mon — Fri / 8am — 6pm</p>
-  <a href="tel:+97477329077" className="text-2xl font-bold text-slate-800 group-hover:text-orange-600 transition-colors">+974 7732 9077</a>
-</motion.div>
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="grid lg:grid-cols-3 gap-12 lg:gap-20">
+            
+            {/* Left: Info Column */}
+            <div className="lg:col-span-1">
+               <motion.div
+                 initial={{ opacity: 0, x: -30 }}
+                 whileInView={{ opacity: 1, x: 0 }}
+                 viewport={{ once: true }}
+                 className="space-y-16"
+               >
+                  <div>
+                     <h2 className="text-sm font-bold text-[#e4a11e] uppercase tracking-[0.4em] mb-6">Project Inquiry</h2>
+                     <h3 className="text-4xl md:text-5xl font-black text-black leading-tight uppercase tracking-tighter mb-8">
+                       Let's Build <br />
+                       <span className="italic" style={{ color: primaryColor }}>Together.</span>
+                     </h3>
+                     <p className="text-gray-500 text-lg font-light leading-relaxed">
+                        Consult with our expert engineering team for your next commercial or residential project.
+                     </p>
+                  </div>
 
-{/* Email */}
-<motion.div variants={cardVariants} 
-  className="bg-white p-8 rounded-xl shadow-lg border border-slate-100 hover:border-orange-500 transition-all duration-300 hover:shadow-2xl group flex flex-col items-start">
-  <div className="w-12 h-12 bg-orange-50 text-orange-600 rounded-full flex items-center justify-center text-xl mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
-    <FaEnvelope />
-  </div>
-  <h3 className="text-lg font-bold text-[#00224D] uppercase tracking-wider mb-2">Email Us</h3>
-  {/* UPDATED STYLE BELOW */}
-  <p className="text-slate-400 text-xs font-bold uppercase tracking-[0.15em] mb-4">Online Support 24/7</p>
-  <a href="mailto:info@multiverseint.com" className="text-lg font-bold text-slate-800 group-hover:text-orange-600 transition-colors break-all">info@multiverseintl.com</a>
-</motion.div>
+                  <div className="space-y-10">
+                     <div className="flex gap-6 group">
+                        <div className="w-12 h-12 shrink-0 border border-gray-100 flex items-center justify-center text-[#e4a11e] group-hover:bg-[#e4a11e] group-hover:text-black transition-all">
+                           <FaPhoneAlt />
+                        </div>
+                        <div>
+                           <h4 className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Direct Lines</h4>
+                           <p className="text-xl font-bold text-black mb-1">9360367453</p>
+                           <p className="text-xl font-bold text-black mb-1">9514429232</p>
+                           <p className="text-xs text-gray-400 uppercase tracking-widest">Mon - Sat / 9am - 7pm</p>
+                        </div>
+                     </div>
 
-{/* Visit */}
-<motion.div variants={cardVariants} 
-  className="bg-white p-8 rounded-xl shadow-lg border border-slate-100 hover:border-orange-500 transition-all duration-300 hover:shadow-2xl group flex flex-col items-start">
-  <div className="w-12 h-12 bg-orange-50 text-orange-600 rounded-full flex items-center justify-center text-xl mb-6 group-hover:bg-orange-500 group-hover:text-white transition-colors">
-    <FaMapMarkerAlt />
-  </div>
-  <h3 className="text-lg font-bold text-[#00224D] uppercase tracking-wider mb-2">Visit Us</h3>
-  {/* UPDATED STYLE BELOW */}
-  <p className="text-slate-400 text-xs font-bold uppercase tracking-[0.15em] mb-4">Main Office HQ</p>
-  <p className="text-xl font-bold text-slate-800 group-hover:text-orange-600 transition-colors">Doha, Qatar</p>
-</motion.div>
+                     <div className="flex gap-6 group">
+                        <div className="w-12 h-12 shrink-0 border border-gray-100 flex items-center justify-center text-[#e4a11e] group-hover:bg-[#e4a11e] group-hover:text-black transition-all">
+                           <FaEnvelope />
+                        </div>
+                        <div>
+                           <h4 className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Digital Inquiry</h4>
+                           <p className="text-xl font-bold text-black mb-1">md@graha.builders</p>
+                           <p className="text-xs text-gray-400 uppercase tracking-widest">Direct to Management</p>
+                        </div>
+                     </div>
 
-          </motion.div>
+                     <div className="flex gap-6 group">
+                        <div className="w-12 h-12 shrink-0 border border-gray-100 flex items-center justify-center text-[#e4a11e] group-hover:bg-[#e4a11e] group-hover:text-black transition-all">
+                           <FaMapMarkerAlt />
+                        </div>
+                        <div>
+                           <h4 className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">HQ Address</h4>
+                           <p className="text-lg font-bold text-black mb-1 leading-tight">19B/22, vanakara street, <br /> Tiruvannamalai - 606601</p>
+                           <p className="text-xs text-gray-400 uppercase tracking-widest">Tamil Nadu, India</p>
+                        </div>
+                     </div>
+
+                     <div className="flex gap-6 group">
+                        <a 
+                          href="https://www.instagram.com/graha.builders?utm_source=qr&igsh=eXh4c3NldmpqODR2" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="w-12 h-12 shrink-0 border border-gray-100 flex items-center justify-center text-[#e4a11e] group-hover:bg-[#e4a11e] group-hover:text-black transition-all"
+                        >
+                           <FaInstagram />
+                        </a>
+                        <div>
+                           <h4 className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Instagram</h4>
+                           <p className="text-xl font-bold text-black mb-1">@graha.builders</p>
+                           <p className="text-xs text-gray-400 uppercase tracking-widest">Follow our Progress</p>
+                        </div>
+                     </div>
+                  </div>
+               </motion.div>
+            </div>
+
+            {/* Right: Form Column */}
+            <div className="lg:col-span-2">
+               <motion.div
+                 initial={{ opacity: 0, y: 30 }}
+                 whileInView={{ opacity: 1, y: 0 }}
+                 viewport={{ once: true }}
+                 className="bg-black p-8 md:p-20 shadow-2xl relative"
+               >
+                  <FaDraftingCompass className="absolute top-10 right-10 text-white/5 text-9xl pointer-events-none" />
+
+                  <h3 className="text-3xl font-black text-white uppercase tracking-tighter mb-12 flex items-center gap-4">
+                     <span className="w-10 h-[1px] bg-[#e4a11e]"></span>
+                     Technical Request Form
+                  </h3>
+
+                  <form onSubmit={handleSubmit} className="space-y-10">
+                     <div className="grid md:grid-cols-2 gap-10">
+                        <div className="relative">
+                           <input 
+                             type="text" name="name" required value={formData.name} onChange={handleChange} 
+                             className="w-full bg-transparent border-b border-white/20 py-4 text-white focus:outline-none focus:border-[#e4a11e] transition-colors placeholder:text-white/20"
+                             placeholder="FULL NAME *" 
+                           />
+                        </div>
+                        <div className="relative">
+                           <input 
+                             type="tel" name="phone" required value={formData.phone} onChange={handleChange} 
+                             maxLength="10"
+                             className="w-full bg-transparent border-b border-white/20 py-4 text-white focus:outline-none focus:border-[#e4a11e] transition-colors placeholder:text-white/20"
+                             placeholder="CONTACT NUMBER (10 DIGITS) *" 
+                           />
+                        </div>
+                     </div>
+
+                     <div className="relative">
+                        <input 
+                          type="email" name="email" required value={formData.email} onChange={handleChange} 
+                          className="w-full bg-transparent border-b border-white/20 py-4 text-white focus:outline-none focus:border-[#e4a11e] transition-colors placeholder:text-white/20"
+                          placeholder="EMAIL ADDRESS (LOWERCASE) *" 
+                        />
+                     </div>
+
+                     <div className="relative">
+                        <textarea 
+                          name="message" rows="4" value={formData.message} onChange={handleChange} 
+                          className="w-full bg-transparent border-b border-white/20 py-4 text-white focus:outline-none focus:border-[#e4a11e] transition-colors placeholder:text-white/20 resize-none"
+                          placeholder="PROJECT DESCRIPTION / MESSAGE"
+                        ></textarea>
+                     </div>
+
+                     <AnimatePresence mode="wait">
+                       {status.error && (
+                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-red-500 text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+                           <FaExclamationCircle /> {status.error}
+                         </motion.div>
+                       )}
+                       {status.success && (
+                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[#e4a11e] text-xs font-bold uppercase tracking-widest flex items-center gap-2">
+                           <FaCheckCircle /> Technical query submitted successfully.
+                         </motion.div>
+                       )}
+                     </AnimatePresence>
+
+                     <button 
+                       type="submit" disabled={status.loading}
+                       className="w-full py-6 bg-[#e4a11e] text-black font-black uppercase tracking-[0.3em] text-xs hover:bg-white transition-all flex items-center justify-center gap-4 group"
+                     >
+                        {status.loading ? "PROCESSING..." : "INITIATE CONSULTATION"}
+                        <FaPaperPlane className="group-hover:translate-x-2 transition-transform" />
+                     </button>
+                  </form>
+               </motion.div>
+
+               {/* MAP SECTION */}
+               <div className="mt-12 h-[300px] md:h-[400px] grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-700 shadow-2xl overflow-hidden rounded-sm border border-gray-100">
+                  <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124611.8967918338!2d79.0322238491823!3d12.221295286591147!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bab070f6f874983%3A0xc3b0907d7f72439d!2sTiruvannamalai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1707123456789!5m2!1sen!2sin" 
+                    className="w-full h-full border-0" 
+                    allowFullScreen="" 
+                    loading="lazy" 
+                  ></iframe>
+               </div>
+            </div>
+
+          </div>
         </div>
       </section>
 
-      {/* FORM & MAP SECTION */}
-      <section className="pb-24 px-6 relative">
-        <BlueprintGrid />
-        <div className="container mx-auto relative z-10">
-          
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={fadeInUp}
-            className="bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col lg:flex-row"
-          >
-
-            {/* CONTACT FORM */}
-            <div className="lg:w-1/2 p-8 md:p-12">
-              <h2 className="text-3xl font-bold text-[#00224D] mb-2">Send a Message</h2>
-              <p className="text-slate-500 mb-8">Ready to start your project? Fill out the details below.</p>
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-
-                {/* Name */}
-                <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Name *</label>
-                  <motion.input 
-                    whileFocus={{ scale: 1.01, borderColor: "#F97316" }}
-                    type="text" name="name" required value={formData.name} onChange={handleChange} 
-                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-orange-500 transition-all" 
-                    placeholder="John Doe" 
-                  />
-                </div>
-
-                {/* Phone & Email (Side by Side) */}
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Phone *</label>
-                    <motion.input 
-                      whileFocus={{ scale: 1.01, borderColor: "#F97316" }}
-                      type="tel" name="phone" required value={formData.phone} onChange={handleChange} 
-                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-orange-500 transition-all" 
-                      placeholder="+974 ..." 
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Email *</label>
-                    <motion.input 
-                      whileFocus={{ scale: 1.01, borderColor: "#F97316" }}
-                      type="email" name="email" required value={formData.email} onChange={handleChange} 
-                      className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-orange-500 transition-all" 
-                      placeholder="john@email.com" 
-                    />
-                  </div>
-                </div>
-
-                {/* Message */}
-                <div>
-                  <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Message</label>
-                  <motion.textarea 
-                    whileFocus={{ scale: 1.01, borderColor: "#F97316" }}
-                    name="message" rows="4" value={formData.message} onChange={handleChange} 
-                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-orange-500 transition-all resize-none" 
-                    placeholder="How can we help you?"
-                  ></motion.textarea>
-                </div>
-
-                {/* Status */}
-                <AnimatePresence mode="wait">
-                  {status.error && (
-                    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="bg-red-50 text-red-600 p-3 rounded-lg flex items-center gap-2 text-sm border border-red-100">
-                      <FaExclamationCircle /> {status.error}
-                    </motion.div>
-                  )}
-                  {status.success && (
-                    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="bg-green-50 text-green-700 p-3 rounded-lg flex items-center gap-2 text-sm border border-green-100">
-                      <FaCheckCircle /> Enquiry submitted successfully!
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* Button */}
-                <motion.button 
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.95 }}
-                  type="submit" disabled={status.loading} 
-                  className="w-full bg-[#00224D] text-white font-bold py-4 rounded-lg shadow-lg hover:bg-orange-600 disabled:bg-slate-400 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2 group"
-                >
-                  {status.loading ? <span>Sending...</span> : (
-                    <><span className="group-hover:translate-x-1 transition-transform">Send Message</span><FaPaperPlane className="text-sm group-hover:translate-x-1 transition-transform" /></>
-                  )}
-                </motion.button>
-              </form>
-            </div>
-
-            {/* MAP & WHATSAPP */}
-            <div className="lg:w-1/2 bg-slate-100 relative min-h-[400px] border-l border-slate-200">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230888.7770732864!2d51.36531398188289!3d25.284097401938965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e45c534cdc43bc3%3A0x23d08538f8dc55f9!2sDoha%2C%20Qatar!5e0!3m2!1sen!2sin!4v1707123456789!5m2!1sen!2sin" 
-                className="absolute inset-0 w-full h-full border-0" 
-                allowFullScreen="" 
-                loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
-              
-              
-            </div>
-          </motion.div>
-        </div>
+      {/* FINAL STATEMENT */}
+      <section className="py-20 bg-slate-50 border-t border-gray-100 text-center">
+         <h4 className="text-2xl md:text-4xl font-black text-black uppercase tracking-tighter mb-4">Precision Engineering. Dedicated Support.</h4>
+         <div className="w-16 h-1 bg-[#e4a11e] mx-auto mb-8"></div>
+         <p className="text-gray-400 font-bold uppercase tracking-[0.5em] text-[10px]">The Graha Standard / Contact Operations</p>
       </section>
+
     </div>
   );
 };

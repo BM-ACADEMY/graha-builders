@@ -1,149 +1,117 @@
 import React from 'react';
-import { FaShieldAlt, FaArrowRight, FaCheckCircle } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+import { FaShieldAlt, FaArrowRight, FaCheckCircle, FaHardHat, FaDraftingCompass } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-// 👇 IMPORT YOUR HOOK IMAGE
-import craneHook from '../../assets/crane-hook.png';
-
 const HomeHSE = () => {
-
-  const rulerStyle = {
-    backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg stroke='%23cbd5e1' stroke-width='1'%3E%3Cpath d='M0 40V20'/%3E%3Cpath d='M10 40V30'/%3E%3Cpath d='M20 40V25'/%3E%3Cpath d='M30 40V30'/%3E%3C/g%3E%3C/svg%3E")`,
-    backgroundRepeat: 'repeat-x',
-    backgroundPosition: 'bottom',
-    height: '40px',
-    width: '100%',
-  };
+  const primaryColor = "#e4a11e";
 
   return (
-    <section className="pt-16 pb-16 md:pt-32 md:pb-24 bg-[#f3f4f6] relative overflow-hidden">
-
-      <style>{`
-        @keyframes moveRuler {
-          0% { background-position-x: 0px; }
-          100% { background-position-x: 40px; }
-        }
-        .ruler-anim {
-          animation: moveRuler 1s linear infinite;
-        }
-        @keyframes bounceSlow {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(15px); }
-        }
-        .animate-bounce-slow {
-          animation: bounceSlow 4s infinite ease-in-out;
-        }
-      `}</style>
-
-      {/* RULER */}
-      <div className="absolute -top-5 left-0 w-full ruler-anim z-0 opacity-50" style={rulerStyle}></div>
-
-      {/* HANGING CRANE HOOK */}
-      {/* ✅ FIXED: Increased z-index to 30 (front), moved up (-top-20) to clear text */}
-      <div className="absolute -top-20 md:-top-24 right-5 md:right-10 w-14 md:w-24 z-30 animate-bounce-slow pointer-events-none opacity-100">
-
-        {/* Cables */}
-        <div className="absolute bottom-full left-1/2 -translate-x-1/2 w-[70%] h-[1000px] flex justify-between px-1 -mb-1 z-0">
-          <div className="w-[2px] bg-[#4a4a4a] h-full opacity-90"></div>
-          <div className="w-[2px] bg-[#4a4a4a] h-full opacity-90"></div>
-        </div>
-
-        {/* Hook Image */}
-        <img
-          src={craneHook}
-          alt="Crane Hook"
-          className="w-full drop-shadow-xl relative z-10"
-        />
+    <section className="py-24 md:py-40 bg-white relative overflow-hidden">
+      
+      {/* Background Blueprint Grid */}
+      <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none"
+           style={{ 
+             backgroundImage: `linear-gradient(${primaryColor} 1px, transparent 1px), linear-gradient(90deg, ${primaryColor} 1px, transparent 1px)`,
+             backgroundSize: '80px 80px' 
+           }}>
       </div>
 
-      <div className="container mx-auto px-6 relative z-20">
-        <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="flex flex-col lg:flex-row items-center gap-20">
 
-          {/* LEFT CARD (Orange Box) */}
-          <div className="w-full lg:w-1/2 relative flex items-center justify-center lg:justify-start">
-
-            <div className="relative z-10 bg-orange-600 w-full md:max-w-xl shadow-2xl rounded-sm overflow-hidden p-8 md:p-14">
-
-              {/* Background Texture */}
-              <div className="absolute inset-0 z-0 opacity-10 mix-blend-multiply pointer-events-none">
-                <img
-                  src="https://img.freepik.com/free-vector/white-wireframe-structure_1017-30691.jpg"
-                  alt="Construction Wireframe"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              {/* Card Content */}
-              <div className="relative z-10">
-                <div className="flex items-center gap-3 mb-4 md:mb-6">
-                  <FaShieldAlt className="text-2xl md:text-3xl text-orange-200" />
-                  <span className="text-white font-bold uppercase tracking-widest text-xs md:text-sm">
-                    Quality & HSE
-                  </span>
+          {/* LEFT CONTENT: TECHNICAL SPECS */}
+          <div className="w-full lg:w-1/2">
+             <motion.div
+               initial={{ opacity: 0, x: -30 }}
+               whileInView={{ opacity: 1, x: 0 }}
+               viewport={{ once: true }}
+             >
+                <div className="flex items-center gap-4 mb-8">
+                  <FaHardHat className="text-2xl text-gray-300" />
+                  <span className="text-gray-400 font-bold uppercase tracking-[0.4em] text-xs">Standard Compliance</span>
                 </div>
 
-                <h2 className="text-2xl md:text-4xl font-heading font-bold text-white mb-6 md:mb-8 leading-tight">
-                  Built on Safety, Driven by Quality
+                <h2 className="text-4xl md:text-6xl font-black text-black mb-10 leading-tight tracking-tighter uppercase">
+                  Built on <span style={{ color: primaryColor }}>Safety</span>,<br />
+                  Driven by <span className="italic">Quality.</span>
                 </h2>
+
+                <p className="text-gray-600 text-lg md:text-xl font-light leading-relaxed mb-12 max-w-xl">
+                  At Graha Builders, we maintain uncompromising standards of quality, health, and environmental responsibility by strictly following approved specifications across all operations in Tamil Nadu.
+                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
+                   {[
+                     { icon: <FaCheckCircle />, title: "Approved Materials" },
+                     { icon: <FaShieldAlt />, title: "Safe Work Practices" }
+                   ].map((item, i) => (
+                     <div key={i} className="flex items-center gap-4 p-4 border border-gray-100 bg-slate-50 rounded-sm group hover:border-[#e4a11e] transition-colors">
+                        <div className="text-xl text-[#e4a11e] group-hover:scale-110 transition-transform">
+                           {item.icon}
+                        </div>
+                        <span className="text-black font-black uppercase text-xs tracking-widest">{item.title}</span>
+                     </div>
+                   ))}
+                </div>
 
                 <Link
                   to="/hse"
-                  className="inline-flex items-center bg-white text-[#00224D] font-bold text-xs uppercase px-6 py-3 md:px-8 md:py-4 hover:bg-[#00224D] hover:text-white transition-colors tracking-wider shadow-lg"
+                  className="group relative inline-flex items-center gap-8 py-5 pr-10 border-t border-b border-black/5 hover:border-[#e4a11e] transition-all duration-500"
                 >
-                  Our Quality Policy <FaArrowRight className="ml-2" />
+                  <span className="text-black font-black uppercase tracking-[0.3em] text-xs md:text-sm">Read Our Quality Policy</span>
+                  <div className="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center group-hover:bg-[#e4a11e] group-hover:border-[#e4a11e] transition-all">
+                    <FaArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1 group-hover:text-black text-gray-400" />
+                  </div>
                 </Link>
-              </div>
-            </div>
+             </motion.div>
           </div>
 
-          {/* RIGHT CONTENT */}
-          <div className="w-full lg:w-1/2 relative z-10 pl-0 lg:pl-10">
-
-            <div className="mb-6">
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[10px] border-b-orange-600"></div>
-                <span className="text-slate-500 font-bold uppercase tracking-widest text-xs">
-                  HSE COMMITMENT
+          {/* RIGHT CARD: INDUSTRIAL VISUAL */}
+          <div className="w-full lg:w-1/2 relative">
+             <motion.div
+               initial={{ opacity: 0, scale: 0.9 }}
+               whileInView={{ opacity: 1, scale: 1 }}
+               viewport={{ once: true }}
+               className="relative z-10"
+             >
+                {/* Large Background Letter 'S' for Safety */}
+                <span className="absolute -top-20 -right-10 text-[250px] font-black opacity-[0.03] select-none leading-none">
+                  S
                 </span>
-              </div>
-              <h2 className="text-3xl md:text-5xl font-heading font-bold text-[#00224D]">
-                Zero-Accident Mindset
-              </h2>
-            </div>
 
-            <div className="mb-8">
-              <p className="text-slate-500 leading-relaxed text-base md:text-lg mb-8 font-medium">
-                We maintain high standards of quality, health, safety, and environmental responsibility by strictly following approved specifications, local regulations, and safe working practices across all operations.
-              </p>
+                <div className="relative z-10 bg-black p-4 rounded-sm shadow-2xl">
+                   <img
+                     src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2072&auto=format&fit=crop"
+                     alt="Safety Operations"
+                     className="w-full h-[400px] md:h-[550px] object-cover grayscale brightness-75 hover:grayscale-0 transition-all duration-700"
+                   />
+                   
+                   {/* Technical Overlay */}
+                   <div className="absolute top-10 left-10 p-6 bg-[#e4a11e] text-black shadow-2xl">
+                      <FaShieldAlt className="text-3xl mb-4" />
+                      <p className="text-[10px] font-black uppercase tracking-widest leading-none">Status: Compliant</p>
+                      <p className="text-xl font-mono font-bold mt-1">CODE-HSE-2024</p>
+                   </div>
 
-              <div className="w-full h-px bg-slate-300 my-6 md:my-8"></div>
-
-              {/* Bullets */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-orange-100 flex-shrink-0 flex items-center justify-center text-orange-600">
-                    <FaCheckCircle />
-                  </div>
-                  <span className="text-slate-700 font-bold text-sm">
-                    Approved Materials
-                  </span>
+                   {/* Decorative Measure Line */}
+                   <div className="absolute -bottom-6 left-10 right-10 h-10 border-x border-b border-white/20 flex items-center justify-center">
+                      <span className="text-[8px] text-white/40 font-mono tracking-[0.5em] uppercase">Safety Zone Perimeter // 100% SECURE</span>
+                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-orange-100 flex-shrink-0 flex items-center justify-center text-orange-600">
-                    <FaShieldAlt />
-                  </div>
-                  <span className="text-slate-700 font-bold text-sm">
-                    Safe Work Practices
-                  </span>
-                </div>
-              </div>
-
-            </div>
-
+             </motion.div>
           </div>
 
         </div>
       </div>
+
+      {/* Background Vertical Text */}
+      <div className="absolute left-10 bottom-0 opacity-[0.02] select-none pointer-events-none">
+         <h2 className="text-[12vw] font-black text-black uppercase vertical-rl rotate-180 tracking-tighter">
+           COMPLIANCE
+         </h2>
+      </div>
+
     </section>
   );
 };

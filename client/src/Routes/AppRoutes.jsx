@@ -23,9 +23,9 @@ const AppRoutes = () => {
         element={
           <>
             <Helmet>
-              <title>Multiverse Trading & Contracting Qatar</title>
-              <meta name="description" content="Trusted trading and contracting company in Qatar offering civil construction, MEP, fit-out and reliable project solutions."/>
-                <link rel="canonical" href="https://multiverseint.com/" />
+              <title>Graha Builders | Leading Construction Company Qatar</title>
+              <meta name="description" content="Graha Builders provides world-class civil construction, MEP, and project management services in Qatar."/>
+                <link rel="canonical" href="https://grahabuilders.com/" />
             </Helmet>
 
             <Hero />

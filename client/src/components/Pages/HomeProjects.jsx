@@ -1,179 +1,161 @@
 import React, { useState } from 'react';
-import { FaArrowRight, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaArrowRight, FaChevronLeft, FaChevronRight, FaFilePdf, FaDraftingCompass } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
+// Import Assets
+import img1 from '../../assets/WhatsApp Image 2026-05-12 at 6.48.15 PM.jpeg';
+import img2 from '../../assets/WhatsApp Image 2026-05-12 at 6.48.16 PM.jpeg';
+import img3 from '../../assets/WhatsApp Image 2026-05-12 at 6.48.18 PM.jpeg';
+
 const HomeProjects = () => {
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  // 🎨 BRAND COLORS
+  const primaryColor = "#e4a11e";
 
   const projects = [
     {
       id: 1,
-      title: "Commercial Office Fit-out",
-      category: "INTERIOR",
-      date: "Building since 09,01,2024",
-      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop",
+      title: "Ashok House Elevation",
+      category: "RESIDENTIAL",
+      location: "Tiruvannamalai",
+      desc: "Modern residential elevation design with premium finishes.",
+      image: img1,
+      pdf: "/src/assets/AshokHouse_Elevation01.pdf"
     },
     {
       id: 2,
-      title: "General Construction",
+      title: "Vimal Nishitha Project",
       category: "BUILDING",
-      date: "Building since 12,03,2025",
-      image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop",
+      location: "Chennai",
+      desc: "A contemporary multi-family residential building.",
+      image: img2,
+      pdf: "/src/assets/VimalNishitha_Elevation01.pdf"
     },
     {
       id: 3,
-      title: "Luxury Villa Renovation",
-      category: "RESIDENTIAL",
-      date: "Building since 05,11,2024",
-      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop",
-    },
-    {
-      id: 4,
-      title: "Industrial Warehouse",
-      category: "INDUSTRIAL",
-      date: "Building since 01,02,2025",
-      image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop",
+      title: "ELEVATION TN Development",
+      category: "COMMERCIAL",
+      location: "Tamil Nadu",
+      desc: "Large scale commercial development with technical excellence.",
+      image: img3,
+      pdf: "/src/assets/ELEVATION TN.pdf"
     }
   ];
 
-  const nextSlide = () => {
-    setActiveIndex((prev) => (prev === projects.length - 1 ? 0 : prev + 1));
-  };
-
-  const prevSlide = () => {
-    setActiveIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
-  };
-
-  const getSlideStyles = (index) => {
-    if (index === activeIndex) {
-      // ✅ Active Slide: 92% width on mobile (single card view), 60% on desktop
-      return "left-1/2 -translate-x-1/2 w-[92%] md:w-[60%] z-20 opacity-100 shadow-2xl";
-    }
-    else if (index === (activeIndex - 1 + projects.length) % projects.length) {
-      // ✅ Previous Slide: Hidden on mobile, visible on desktop
-      return "hidden md:block left-0 translate-x-0 w-[18%] z-10 opacity-100";
-    }
-    else if (index === (activeIndex + 1) % projects.length) {
-      // ✅ Next Slide: Hidden on mobile, visible on desktop
-      return "hidden md:block right-0 translate-x-0 w-[18%] z-10 opacity-100";
-    }
-    else {
-      return "opacity-0 z-0 pointer-events-none";
-    }
-  };
+  const nextSlide = () => setActiveIndex((prev) => (prev === projects.length - 1 ? 0 : prev + 1));
+  const prevSlide = () => setActiveIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
 
   return (
-    // ✅ Reduced padding: py-12 on mobile
-    <section className="py-12 md:py-24 bg-white overflow-hidden">
-      <div className="container mx-auto px-6">
+    <section className="py-24 md:py-40 bg-black relative overflow-hidden">
+      
+      {/* Background Decorator */}
+      <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
+        <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, gray 1px, transparent 0)', backgroundSize: '50px 50px' }}></div>
+      </div>
 
-        {/* --- HEADER --- */}
-        <div className="text-center mb-10 md:mb-16">
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[10px] border-b-orange-600"></div>
-            <span className="text-slate-500 font-bold uppercase tracking-widest text-xs">
-              RECENT WORK
-            </span>
-          </div>
-          {/* ✅ Responsive Text Sizes */}
-          <h2 className="text-3xl md:text-5xl font-heading font-bold text-[#00224D]">
-            Check our latest projects
-          </h2>
-          <p className="text-slate-400 mt-4 max-w-xl mx-auto text-sm md:text-base px-4">
-             We are the best construction agency in the world, delivering excellence in every blueprint we execute.
-          </p>
+      <div className="container mx-auto px-6 relative z-10">
+        
+        {/* Header */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-20 gap-8">
+           <div className="max-w-3xl">
+              <motion.div 
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="flex items-center gap-3 mb-6"
+              >
+                <div className="w-12 h-[2px]" style={{ backgroundColor: primaryColor }}></div>
+                <span className="text-gray-400 font-bold uppercase tracking-[0.4em] text-xs">Portfolio / Recent Works</span>
+              </motion.div>
+              <motion.h2 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="text-4xl md:text-7xl font-black text-white leading-none uppercase tracking-tighter"
+              >
+                CRAFTING <br />
+                <span style={{ color: primaryColor }}>LANDMARKS.</span>
+              </motion.h2>
+           </div>
+
+           <div className="flex gap-4">
+              <button onClick={prevSlide} className="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#e4a11e] hover:border-[#e4a11e] hover:text-black transition-all">
+                 <FaChevronLeft />
+              </button>
+              <button onClick={nextSlide} className="w-14 h-14 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-[#e4a11e] hover:border-[#e4a11e] hover:text-black transition-all">
+                 <FaChevronRight />
+              </button>
+           </div>
         </div>
 
-        {/* --- CAROUSEL AREA --- */}
-        {/* ✅ Adjusted Height: 400px on mobile, 500px on desktop */}
-        <div className="relative h-[400px] md:h-[500px] w-full max-w-7xl mx-auto">
+        {/* Project Display */}
+        <div className="relative h-[500px] md:h-[700px] group">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIndex}
+              initial={{ opacity: 0, scale: 1.1 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.8 }}
+              className="absolute inset-0 rounded-3xl overflow-hidden shadow-2xl"
+            >
+              {/* Background Image */}
+              <img 
+                src={projects[activeIndex].image} 
+                alt={projects[activeIndex].title} 
+                className="w-full h-full object-cover grayscale brightness-50"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
 
-          {/* ARROWS - Now Visible on Mobile (Smaller size) */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-0 md:left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 md:w-12 md:h-12 bg-orange-600 rounded-full shadow-lg flex items-center justify-center text-white hover:bg-[#00224D] transition-all duration-300"
-          >
-            <FaChevronLeft className="mr-0.5 text-sm md:text-base" />
-          </button>
+              {/* Content Card */}
+              <div className="absolute bottom-10 left-6 right-6 md:left-12 md:bottom-16 max-w-4xl">
+                 <motion.div
+                   initial={{ y: 30, opacity: 0 }}
+                   animate={{ y: 0, opacity: 1 }}
+                   transition={{ delay: 0.3 }}
+                 >
+                    <span className="inline-block px-4 py-2 bg-[#e4a11e] text-black text-[10px] font-black uppercase tracking-widest mb-6">
+                      {projects[activeIndex].category} / {projects[activeIndex].location}
+                    </span>
+                    <h3 className="text-4xl md:text-7xl font-black text-white mb-6 uppercase tracking-tighter leading-tight">
+                      {projects[activeIndex].title}
+                    </h3>
+                    <p className="text-gray-300 text-lg md:text-xl font-light max-w-2xl mb-10 leading-relaxed">
+                      {projects[activeIndex].desc}
+                    </p>
 
-          <button
-            onClick={nextSlide}
-            className="absolute right-0 md:right-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 md:w-12 md:h-12 bg-orange-600 rounded-full shadow-lg flex items-center justify-center text-white hover:bg-[#00224D] transition-all duration-300"
-          >
-            <FaChevronRight className="ml-0.5 text-sm md:text-base" />
-          </button>
-
-          {/* SLIDES CONTAINER */}
-          <div className="relative w-full h-full">
-            {projects.map((project, index) => {
-               const isActive = index === activeIndex;
-
-               return (
-                <div
-                  key={project.id}
-                  className={`absolute top-0 h-full transition-all duration-500 ease-in-out ${getSlideStyles(index)}`}
-                >
-                  {/* Inner Card */}
-                  <div className="relative w-full h-full overflow-hidden bg-slate-900 group rounded-md md:rounded-sm shadow-xl">
-
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className={`w-full h-full object-cover transition-transform duration-700 ${isActive ? 'scale-100 group-hover:scale-105' : 'scale-100 brightness-50'}`}
-                    />
-
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
-
-                    {/* CONTENT */}
-                    {/* ✅ Responsive Padding & Text Sizes */}
-                    <div className={`absolute bottom-0 left-0 p-6 md:p-12 w-full transition-all duration-300 ${isActive ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-
-                      <span className="inline-block px-3 py-1 bg-white/20 text-white text-[9px] md:text-[10px] font-bold tracking-widest uppercase mb-2 md:mb-4 backdrop-blur-md rounded">
-                        {project.category}
-                      </span>
-
-                      <h3 className="text-2xl md:text-4xl font-bold text-white mb-2 leading-tight">
-                        {project.title}
-                      </h3>
-
-                      <p className="text-gray-300 text-xs md:text-sm font-medium mb-12 md:mb-0">
-                        {project.date}
-                      </p>
+                    <div className="flex flex-wrap gap-6">
+                       <Link to="/projects" className="inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-black uppercase tracking-widest text-xs hover:bg-[#e4a11e] transition-colors">
+                          View Project <FaArrowRight />
+                       </Link>
+                       <a href={projects[activeIndex].pdf} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 px-8 py-4 border border-white/20 text-white font-black uppercase tracking-widest text-xs hover:bg-white/10 transition-colors">
+                          View Specs (PDF) <FaFilePdf style={{ color: primaryColor }} />
+                       </a>
                     </div>
+                 </motion.div>
+              </div>
 
-                    {/* ORANGE BUTTON */}
-                    {isActive && (
-                      <Link
-                        to="/projects"
-                        // ✅ Responsive Button Size
-                        className="absolute bottom-0 right-0 bg-orange-600 text-white font-bold text-[10px] md:text-xs uppercase px-6 py-3 md:px-8 md:py-5 hover:bg-[#00224D] transition-colors tracking-wider flex items-center gap-2"
-                      >
-                        Explore <span className="hidden md:inline">Project</span> <FaArrowRight />
-                      </Link>
-                    )}
-
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* --- DOTS --- */}
-        <div className="flex justify-center gap-2 mt-8 md:mt-10">
-          {projects.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setActiveIndex(index)}
-              className={`h-2.5 rounded-full transition-all duration-300 ${
-                index === activeIndex ? "bg-orange-600 w-8" : "bg-slate-300 hover:bg-orange-400 w-2.5"
-              }`}
-            />
-          ))}
+              {/* Technical Indicator */}
+              <div className="absolute top-10 right-10 hidden md:flex items-center gap-4 text-white/20">
+                 <FaDraftingCompass className="text-4xl" />
+                 <div className="h-[1px] w-24 bg-white/10"></div>
+                 <span className="font-mono text-sm uppercase tracking-widest">ID-00{projects[activeIndex].id}</span>
+              </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
       </div>
+
+      {/* Background Vertical Text */}
+      <div className="absolute left-10 bottom-0 opacity-[0.03] select-none pointer-events-none">
+         <h2 className="text-[15vw] font-black text-white uppercase vertical-rl rotate-180 tracking-tighter">
+           PORTFOLIO
+         </h2>
+      </div>
+
     </section>
   );
 };

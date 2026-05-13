@@ -5,14 +5,35 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-color: #e4a11e;
+  --secondary-gray: #4b5563;
+  --brand-black: #000000;
+  --brand-white: #ffffff;
+}
+
 /* 2. Global Font Settings */
 body {
   font-family: 'Roboto', sans-serif; /* Sets default text font */
   -webkit-font-smoothing: antialiased;
+  background-color: var(--brand-white);
+  color: var(--brand-black);
 }
 
 /* 3. Custom Class for Headings */
-/* Since we aren't using tailwind.config.js, we define this class manually */
 .font-heading {
   font-family: 'Montserrat', sans-serif;
+}
+
+/* Custom Utilities */
+.text-primary {
+  color: var(--primary-color);
+}
+
+.bg-primary {
+  background-color: var(--primary-color);
+}
+
+.border-primary {
+  border-color: var(--primary-color);
 }
