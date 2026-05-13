@@ -218,7 +218,7 @@ const ContactPage = () => {
                         <div className="relative">
                            <input 
                              type="text" name="name" required value={formData.name} onChange={handleChange} 
-                             className="w-full bg-transparent border-b border-white/20 py-4 text-white focus:outline-none focus:border-[#e4a11e] transition-colors placeholder:text-white/20"
+                             className="w-full bg-transparent border-b border-white py-4 text-white focus:outline-none focus:border-[#e4a11e] transition-colors placeholder:text-white"
                              placeholder="FULL NAME *" 
                            />
                         </div>
@@ -226,7 +226,7 @@ const ContactPage = () => {
                            <input 
                              type="tel" name="phone" required value={formData.phone} onChange={handleChange} 
                              maxLength="10"
-                             className="w-full bg-transparent border-b border-white/20 py-4 text-white focus:outline-none focus:border-[#e4a11e] transition-colors placeholder:text-white/20"
+                             className="w-full bg-transparent border-b border-white py-4 text-white focus:outline-none focus:border-[#e4a11e] transition-colors placeholder:text-white"
                              placeholder="CONTACT NUMBER (10 DIGITS) *" 
                            />
                         </div>
@@ -235,7 +235,7 @@ const ContactPage = () => {
                      <div className="relative">
                         <input 
                           type="email" name="email" required value={formData.email} onChange={handleChange} 
-                          className="w-full bg-transparent border-b border-white/20 py-4 text-white focus:outline-none focus:border-[#e4a11e] transition-colors placeholder:text-white/20"
+                          className="w-full bg-transparent border-b border-white py-4 text-white focus:outline-none focus:border-[#e4a11e] transition-colors placeholder:text-white"
                           placeholder="EMAIL ADDRESS (LOWERCASE) *" 
                         />
                      </div>
@@ -243,7 +243,7 @@ const ContactPage = () => {
                      <div className="relative">
                         <textarea 
                           name="message" rows="4" value={formData.message} onChange={handleChange} 
-                          className="w-full bg-transparent border-b border-white/20 py-4 text-white focus:outline-none focus:border-[#e4a11e] transition-colors placeholder:text-white/20 resize-none"
+                          className="w-full bg-transparent border-b border-white py-4 text-white focus:outline-none focus:border-[#e4a11e] transition-colors placeholder:text-white resize-none"
                           placeholder="PROJECT DESCRIPTION / MESSAGE"
                         ></textarea>
                      </div>
