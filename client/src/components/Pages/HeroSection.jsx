@@ -45,7 +45,7 @@ const Hero = () => {
           >
             {/* Professional Tagline */}
             <span className="block text-gray-400 font-medium tracking-[0.3em] uppercase mb-4 text-xs md:text-sm">
-              Engineering Excellence Since 2010
+              Engineering Excellence Since 2020
             </span>
 
             {/* Premium Headline */}

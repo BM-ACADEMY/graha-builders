@@ -59,7 +59,7 @@ const ServicesPage = () => {
       title: "Renovation & Rehabilitation",
       desc: "Giving new life to existing structures. We bridge the gap between old and new, focusing on structural reinforcement, spatial reconfiguration, and aesthetic upgrades.",
       icon: <FaTools />,
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=2070&auto=format&fit=crop"
+      image: "https://images.unsplash.com/photo-1562259949-e8e7689d7828?q=80&w=800&auto=format&fit=crop&fm=webp"
     },
     {
       id: "SRV-05",
@@ -73,14 +73,14 @@ const ServicesPage = () => {
       title: "Traditional Buildings",
       desc: "Preserving the soul of architecture. We respect classical techniques and local heritage, utilizing authentic materials and time-honored craftsmanship.",
       icon: <FaGopuram />,
-      image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?q=80&w=2070&auto=format&fit=crop"
+      image: "https://assets.architecturaldigest.in/photos/69d0e1ac1ae17dc7162356ba/16:9/w_1616,h_909,c_limit/Untitled%20design%20(20).png"
     },
     {
       id: "SRV-07",
       title: "Waterproofing",
       desc: "Ultimate protection for your investment. We provide advanced waterproofing solutions for roofs, basements, and facades using high-grade membranes and sealants.",
       icon: <FaTint />,
-      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop"
+      image: "https://paintmywalls.in/wp-content/uploads/2024/02/Reparing-Cracks-and-Damages-1024x683.jpg"
     }
   ];
 
@@ -194,11 +194,6 @@ const ServicesPage = () => {
                   <p className="text-gray-500 text-sm md:text-base leading-relaxed mb-8 font-light">
                     {service.desc}
                   </p>
-
-                  <div className="flex items-center gap-2 text-black font-bold uppercase tracking-widest text-[10px] group/link">
-                    <span className="pb-1 border-b border-black/10 group-hover/link:border-[#e4a11e] transition-colors">Technical Specs</span>
-                    <FaArrowRight className="group-hover/link:translate-x-2 transition-transform" style={{ color: primaryColor }} />
-                  </div>
                 </div>
 
                 {/* Bottom Border Decorator */}

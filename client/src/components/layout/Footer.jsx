@@ -54,7 +54,7 @@ const Footer = () => {
               Navigation Index
             </h4>
             <ul className="space-y-4">
-              {['Home', 'About', 'Services', 'Projects', 'HSE'].map((item) => (
+              {['Home', 'About', 'Services', 'Projects', 'HSE', 'Careers', 'Contact'].map((item) => (
                 <li key={item}>
                   <Link to={item === 'Home' ? '/' : `/${item.toLowerCase()}`} className="text-sm uppercase tracking-widest hover:text-[#e4a11e] transition-all flex items-center gap-2 group">
                     <span className="w-0 group-hover:w-3 h-[1px] bg-[#e4a11e] transition-all"></span>
@@ -93,7 +93,7 @@ const Footer = () => {
                 <FaEnvelope className="text-[#e4a11e] mt-1 text-lg" />
                 <div>
                   <p className="text-xs font-black text-white uppercase mb-1">Digital Inquiries</p>
-                  <a href="mailto:rahabuilders@gmail.com" className="text-sm font-light hover:text-[#e4a11e]">rahabuilders@gmail.com</a>
+                  <a href="mailto:grahabuilders@gmail.com" className="text-sm font-light hover:text-[#e4a11e]">grahabuilders@gmail.com</a>
                 </div>
               </li>
             </ul>

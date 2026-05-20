@@ -163,7 +163,7 @@ const ContactPage = () => {
                         </div>
                         <div>
                            <h4 className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-1">Digital Inquiry</h4>
-                           <p className="text-xl font-bold text-black mb-1">md@graha.builders</p>
+                           <p className="text-xl font-bold text-black mb-1">grahabuilders@gmail.com</p>
                            <p className="text-xs text-gray-400 uppercase tracking-widest">Direct to Management</p>
                         </div>
                      </div>
@@ -272,7 +272,7 @@ const ContactPage = () => {
                </motion.div>
 
                {/* MAP SECTION */}
-               <div className="mt-12 h-[300px] md:h-[400px] grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-700 shadow-2xl overflow-hidden rounded-sm border border-gray-100">
+               <div className="mt-12 h-[300px] md:h-[400px] opacity-100 transition-all duration-700 shadow-2xl overflow-hidden rounded-sm border border-gray-100">
                   <iframe 
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124611.8967918338!2d79.0322238491823!3d12.221295286591147!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bab070f6f874983%3A0xc3b0907d7f72439d!2sTiruvannamalai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1707123456789!5m2!1sen!2sin" 
                     className="w-full h-full border-0" 

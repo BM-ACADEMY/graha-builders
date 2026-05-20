@@ -13,6 +13,7 @@ import QualityHSE from '../components/Pages/QualityHSE';
 import HomeProjects from '../components/Pages/HomeProjects';
 import HomeHSE from '../components/Pages/HomeHSE';
 import ContactPage from '../components/Pages/ContactPage';
+import CareersPage from '../components/Pages/CareersPage';
 
 const AppRoutes = () => {
   return (
@@ -42,6 +43,7 @@ const AppRoutes = () => {
       <Route path="/services" element={<ServicesPage />} />
       <Route path="/projects" element={<ProjectsPage />} />
       <Route path="/hse" element={<QualityHSE />} />
+      <Route path="/careers" element={<CareersPage />} />
       <Route path="/contact" element={<ContactPage />} />
     </Routes>
   );

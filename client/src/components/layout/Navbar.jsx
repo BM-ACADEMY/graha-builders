@@ -22,12 +22,25 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll when the mobile offcanvas drawer is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
   const navLinks = [
     { title: "Home", path: "/" },
     { title: "About", path: "/about" },
     { title: "Services", path: "/services" },
     { title: "Projects", path: "/projects" },
     { title: "Quality & HSE", path: "/hse" },
+    { title: "Careers", path: "/careers" },
     { title: "Contact", path: "/contact" },
   ];
 
@@ -114,48 +127,52 @@ const Navbar = () => {
       <AnimatePresence>
         {isOpen && (
           <>
+            {/* Elegant semi-transparent backdrop with blur */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="fixed inset-0 bg-black/95 z-[110] backdrop-blur-md"
+              className="fixed inset-0 bg-black/60 z-[110] backdrop-blur-sm"
             />
+            {/* Responsive drawer that does not fully cover the viewport on mobile */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed top-0 right-0 h-full w-full md:w-[400px] bg-black border-l border-white/5 z-[120] flex flex-col p-12"
+              className="fixed top-0 right-0 h-full w-[85vw] sm:w-[380px] md:w-[400px] bg-black border-l border-white/5 z-[120] flex flex-col justify-between p-8 sm:p-12 overflow-y-auto"
             >
-              <div className="flex justify-between items-center mb-16">
-                 <FaDraftingCompass className="text-[#e4a11e] text-3xl" />
-                 <button onClick={() => setIsOpen(false)} className="text-white text-3xl hover:text-[#e4a11e]">
-                    <FaTimes />
-                 </button>
+              <div>
+                <div className="flex justify-between items-center mb-10 sm:mb-16">
+                   <FaDraftingCompass className="text-[#e4a11e] text-3xl" />
+                   <button onClick={() => setIsOpen(false)} className="text-white text-3xl hover:text-[#e4a11e]">
+                      <FaTimes />
+                   </button>
+                </div>
+
+                <div className="flex flex-col gap-6 sm:gap-8">
+                   {navLinks.map((link, index) => (
+                     <Link
+                       key={index}
+                       to={link.path}
+                       onClick={() => setIsOpen(false)}
+                       className="text-2xl sm:text-3xl font-bold text-white uppercase tracking-wide hover:text-[#e4a11e] transition-colors"
+                     >
+                       {link.title}
+                     </Link>
+                   ))}
+                </div>
               </div>
 
-              <div className="flex flex-col gap-8">
-                 {navLinks.map((link, index) => (
-                   <Link
-                     key={index}
-                     to={link.path}
-                     onClick={() => setIsOpen(false)}
-                     className="text-4xl font-black text-white uppercase tracking-tighter hover:text-[#e4a11e] transition-colors"
-                   >
-                     {link.title}
-                   </Link>
-                 ))}
-              </div>
-
-              <div className="mt-auto pt-12 border-t border-white/5">
-                 <div className="mb-8">
+              <div className="mt-12 pt-8 border-t border-white/5">
+                 <div className="mb-6">
                     <GoogleTranslate />
                  </div>
                  <Link
                    to="/contact"
                    onClick={() => setIsOpen(false)}
-                   className="w-full py-5 bg-[#e4a11e] text-black text-center font-black uppercase tracking-widest block"
+                   className="w-full py-4 sm:py-5 bg-[#e4a11e] text-black text-center font-bold uppercase tracking-widest block hover:bg-white hover:text-black transition-all"
                  >
                    Request a Quote
                  </Link>

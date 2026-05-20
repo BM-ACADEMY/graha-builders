@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaBuilding, FaHome, FaCity, FaFilePdf, FaDraftingCompass, FaArrowRight, FaPlay, FaTimes, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaBuilding, FaHome, FaCity, FaFilePdf, FaDraftingCompass, FaArrowRight, FaPlay, FaTimes, FaChevronLeft, FaChevronRight, FaMapMarkerAlt, FaExpand, FaFilm } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 
@@ -21,18 +21,41 @@ import img13 from '../../assets/WhatsApp Image 2026-05-12 at 6.48.20 PM.jpeg';
 import img14 from '../../assets/WhatsApp Image 2026-05-12 at 6.48.21 PM (1).jpeg';
 import img15 from '../../assets/WhatsApp Image 2026-05-12 at 6.48.21 PM (2).jpeg';
 import img16 from '../../assets/WhatsApp Image 2026-05-12 at 6.48.21 PM.jpeg';
-import img17 from '../../assets/WhatsApp Image 2026-05-12 at 6.48.51 PM.jpeg';
-import img18 from '../../assets/WhatsApp Image 2026-05-12 at 6.48.52 PM.jpeg';
-import img19 from '../../assets/WhatsApp Image 2026-05-12 at 6.49.07 PM.jpeg';
-import img20 from '../../assets/WhatsApp Image 2026-05-12 at 6.49.52 PM.jpeg';
-import img21 from '../../assets/WhatsApp Image 2026-05-12 at 6.50.02 PM.jpeg';
-import img22 from '../../assets/WhatsApp Image 2026-05-12 at 7.07.13 PM.jpeg';
+import img17 from '../../assets/site/WhatsApp Image 2026-05-12 at 6.48.51 PM.jpeg';
+import img18 from '../../assets/site/WhatsApp Image 2026-05-12 at 6.48.52 PM.jpeg';
+import img19 from '../../assets/site/WhatsApp Image 2026-05-12 at 6.49.07 PM.jpeg';
+import img20 from '../../assets/site/WhatsApp Image 2026-05-12 at 6.49.52 PM.jpeg';
+import img21 from '../../assets/site/WhatsApp Image 2026-05-12 at 6.50.02 PM.jpeg';
+import img22 from '../../assets/site/WhatsApp Image 2026-05-12 at 7.07.13 PM.jpeg';
+
+import siteImg1 from '../../assets/site/3cent-house-design-03.jpg';
+import siteImg2 from '../../assets/site/9205b11c-90cc-4350-91ba-2dad2da4546b.jpg';
+import siteImg3 from '../../assets/site/DSC00003.avif';
+import siteImg4 from '../../assets/site/c9888514b43b799e592ceab19175e3a5.jpg';
+import siteImg5 from '../../assets/site/high-ceiling-house-33-1024x681.jpg';
+import siteImg6 from '../../assets/site/simple-flat-roof-village-house-design_0_1200.jpg.webp';
 
 import video1 from '../../assets/WhatsApp Video 2026-05-12 at 6.48.54 PM (1).mp4';
 import video2 from '../../assets/WhatsApp Video 2026-05-12 at 6.48.54 PM.mp4';
 
+// --- VECTOR BACKGROUND COMPONENT ---
+const BlueprintBackground = () => (
+  <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+    <motion.div
+      animate={{ backgroundPosition: ["0px 0px", "40px 40px"] }}
+      transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+      className="absolute inset-0 opacity-[0.02]"
+      style={{
+        backgroundImage: `linear-gradient(#e4a11e 1px, transparent 1px), linear-gradient(90deg, #e4a11e 1px, transparent 1px)`,
+        backgroundSize: '60px 60px'
+      }}
+    />
+    <div className="absolute inset-0 bg-gradient-to-b from-white via-transparent to-white"></div>
+  </div>
+);
+
 const ProjectsPage = () => {
-  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [selectedTab, setSelectedTab] = useState('all');
   const [lightboxIndex, setLightboxIndex] = useState(null);
 
   useEffect(() => {
@@ -41,80 +64,109 @@ const ProjectsPage = () => {
 
   const primaryColor = "#e4a11e";
 
-  const mainProjects = [
-    {
-      id: 1,
-      title: "Ashok House Elevation",
-      category: "Residential Construction",
-      location: "Tiruvannamalai",
-      image: img3,
-      pdf: "/src/assets/AshokHouse_Elevation01.pdf",
-      icon: <FaHome />
-    },
-    {
-      id: 2,
-      title: "Vimal Nishitha Project",
-      category: "Apartment Building",
-      location: "Chennai",
-      image: img5,
-      pdf: "/src/assets/VimalNishitha_Elevation01.pdf",
-      icon: <FaCity />
-    },
-    {
-      id: 3,
-      title: "ELEVATION TN Development",
-      category: "Commercial Complex",
-      location: "Tamil Nadu",
-      image: img9,
-      pdf: "/src/assets/ELEVATION TN.pdf",
-      icon: <FaBuilding />
-    }
+  // --- MINIMALIST PROJECT ASSETS ---
+  const projectsData = [
+    { id: "PRJ-01", category: "exterior", type: "image", src: img3, pdf: "/src/assets/AshokHouse_Elevation01.pdf" },
+    { id: "PRJ-02", category: "exterior", type: "image", src: img5, pdf: "/src/assets/VimalNishitha_Elevation01.pdf" },
+    { id: "PRJ-03", category: "exterior", type: "image", src: img9, pdf: "/src/assets/ELEVATION TN.pdf" },
+    { id: "PRJ-04", category: "exterior", type: "image", src: img1 },
+    { id: "PRJ-05", category: "exterior", type: "image", src: img2 },
+    { id: "PRJ-06", category: "exterior", type: "image", src: img4 },
+    { id: "PRJ-07", category: "exterior", type: "image", src: img6 },
+    { id: "PRJ-08", category: "exterior", type: "image", src: img7 },
+    { id: "PRJ-09", category: "exterior", type: "image", src: img8 },
+    { id: "PRJ-10", category: "interior", type: "image", src: img10 },
+    { id: "PRJ-11", category: "interior", type: "image", src: img11 },
+    { id: "PRJ-12", category: "interior", type: "image", src: img12 },
+    { id: "PRJ-13", category: "interior", type: "image", src: img13 },
+    { id: "PRJ-14", category: "interior", type: "image", src: img14 },
+    { id: "PRJ-15", category: "interior", type: "image", src: img15 },
+    { id: "PRJ-16", category: "interior", type: "image", src: img16 },
+    { id: "PRJ-17", category: "exterior", type: "image", src: img17 },
+    { id: "PRJ-18", category: "exterior", type: "image", src: img18 },
+    { id: "PRJ-19", category: "exterior", type: "image", src: img19 },
+    { id: "PRJ-20", category: "exterior", type: "image", src: img20 },
+    { id: "PRJ-21", category: "exterior", type: "image", src: img21 },
+    { id: "PRJ-22", category: "exterior", type: "image", src: img22 },
+    { id: "PRJ-23", category: "video", type: "video", src: video1 },
+    { id: "PRJ-24", category: "video", type: "video", src: video2 },
+    { id: "PRJ-25", category: "exterior", type: "image", src: siteImg1 },
+    { id: "PRJ-26", category: "exterior", type: "image", src: siteImg2 },
+    { id: "PRJ-27", category: "exterior", type: "image", src: siteImg3 },
+    { id: "PRJ-28", category: "exterior", type: "image", src: siteImg4 },
+    { id: "PRJ-29", category: "exterior", type: "image", src: siteImg5 },
+    { id: "PRJ-30", category: "exterior", type: "image", src: siteImg6 }
   ];
 
-  const galleryImages = [
-    img1, img2, img4, img6, img7, img8, img10, img11, img12, img13, img14, img15, img16, img17, img18, img19, img20, img21, img22
-  ];
+  // --- FILTER SYSTEM ---
+  const filteredProjects = projectsData.filter(project => {
+    if (selectedTab === 'all') return true;
+    return project.category === selectedTab;
+  });
 
-  // Combine for Lightbox
-  const allImages = [...mainProjects.map(p => p.image), ...galleryImages];
+  // --- PAGINATION SYSTEM ---
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
+  const totalPages = Math.ceil(filteredProjects.length / itemsPerPage);
 
-  const videos = [
-    { id: 1, src: video1, title: "On-Site Operations 01" },
-    { id: 2, src: video2, title: "On-Site Operations 02" }
-  ];
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedTab]);
 
-  const openLightbox = (img) => {
-    const index = allImages.indexOf(img);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedProjects = filteredProjects.slice(startIndex, startIndex + itemsPerPage);
+
+  const openLightbox = (projectItem) => {
+    const index = paginatedProjects.findIndex(p => p.id === projectItem.id);
     setLightboxIndex(index);
   };
 
   const nextImage = (e) => {
     e.stopPropagation();
-    setLightboxIndex((prev) => (prev + 1) % allImages.length);
+    setLightboxIndex((prev) => (prev + 1) % paginatedProjects.length);
   };
 
   const prevImage = (e) => {
     e.stopPropagation();
-    setLightboxIndex((prev) => (prev - 1 + allImages.length) % allImages.length);
+    setLightboxIndex((prev) => (prev - 1 + paginatedProjects.length) % paginatedProjects.length);
   };
+
+  // Dynamic Column Span Generator for An Asymmetric Designer Grid
+  const getGridClasses = (index) => {
+    // 2nd image and 3rd image asymmetric patterns (spanning 2 columns on desktop)
+    const pos = index % 4;
+    if (pos === 1 || pos === 2) {
+      return "md:col-span-2 h-[350px] md:h-[550px]";
+    }
+    return "md:col-span-1 h-[350px] md:h-[550px]";
+  };
+
+  const tabs = [
+    { id: 'all', name: 'All Projects' },
+    { id: 'interior', name: 'Interior' },
+    { id: 'exterior', name: 'Exterior' },
+    { id: 'video', name: 'Video Logs' }
+  ];
 
   return (
     <div className="min-h-screen bg-white font-sans text-slate-800 selection:bg-orange-100 overflow-x-hidden">
       <Helmet>
-        <title>Portfolio | Graha Builders - Construction & Site Operations</title>
-        <meta name="description" content="View our complete project portfolio, site videos, and architectural elevations across Tamil Nadu."/>
+        <title>Projects Archive | Graha Builders - Signature Structures</title>
+        <meta name="description" content="Explore our rich interactive portfolio of modern homes, commercial hubs, traditional structures, and stunning interiors in Tamil Nadu."/>
         <link rel="canonical" href="https://grahabuilders.com/projects" />
       </Helmet>
 
-      {/* Hero */}
-      <div className="relative w-full h-[300px] md:h-[450px] overflow-hidden flex items-center justify-center bg-black">
+      {/* ==========================
+          SECTION 1: HERO ARCHIVE
+      ========================== */}
+      <div className="relative w-full h-[350px] md:h-[500px] overflow-hidden flex items-center justify-center bg-black">
         <div className="absolute inset-0">
           <img
             src={img21}
             alt="Projects Hero"
-            className="w-full h-full object-cover opacity-50 grayscale brightness-50"
+            className="w-full h-full object-cover opacity-40 grayscale brightness-50"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black"></div>
         </div>
 
         <div className="relative z-10 text-center px-4">
@@ -125,7 +177,7 @@ const ProjectsPage = () => {
           >
             <div className="flex items-center justify-center gap-4 mb-6">
                <div className="w-12 h-[1px] bg-[#e4a11e]"></div>
-               <span className="text-[#e4a11e] font-black tracking-[0.5em] uppercase text-xs">Portfolio & Operations</span>
+               <span className="text-[#e4a11e] font-black tracking-[0.5em] uppercase text-xs">ARCHITECTURAL PORTFOLIO</span>
                <div className="w-12 h-[1px] bg-[#e4a11e]"></div>
             </div>
             <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter mb-4 leading-none uppercase">
@@ -137,247 +189,281 @@ const ProjectsPage = () => {
       </div>
 
       {/* ==========================
-          SECTION 2: FEATURED PROJECTS
+          SECTION 2: DYNAMIC GRID GALLERY
       ========================== */}
-      <section className="py-24 md:py-40">
-        <div className="container mx-auto px-6">
-          <div className="max-w-3xl mb-20 md:mb-32">
-             <h2 className="text-sm font-bold text-[#e4a11e] uppercase tracking-[0.4em] mb-6">Project Documentation</h2>
-             <h3 className="text-4xl md:text-6xl font-black text-black leading-tight uppercase tracking-tighter">
-               Signature <br />
-               <span className="italic" style={{ color: primaryColor }}>Developments.</span>
-             </h3>
-          </div>
+      <section className="py-20 md:py-32 relative">
+        <BlueprintBackground />
 
-          <div className="space-y-24 md:space-y-40">
-             {mainProjects.map((project, index) => (
-               <motion.div
-                 key={project.id}
-                 initial={{ opacity: 0, y: 50 }}
-                 whileInView={{ opacity: 1, y: 0 }}
-                 viewport={{ once: true }}
-                 className={`flex flex-col ${index % 2 !== 0 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-12 lg:gap-20`}
-               >
-                  <div 
-                    className="w-full lg:w-3/5 relative group cursor-pointer"
-                    onClick={() => openLightbox(project.image)}
-                  >
-                     <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl">
-                        <img 
-                          src={project.image} 
-                          alt={project.title} 
-                          className="w-full h-[400px] md:h-[550px] object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                        />
-                        <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
-                     </div>
-                     <div className="absolute -top-6 -left-6 w-full h-full border-2 border-gray-100 rounded-3xl -z-10 group-hover:border-[#e4a11e]/20 transition-colors"></div>
-                  </div>
-
-                  <div className="w-full lg:w-2/5">
-                     <div className="flex items-center gap-4 mb-6">
-                        <div className="text-3xl text-[#e4a11e]">{project.icon}</div>
-                        <span className="text-xs font-black uppercase tracking-[0.3em] text-gray-400">{project.category}</span>
-                     </div>
-                     <h4 className="text-3xl md:text-5xl font-black text-black mb-6 uppercase tracking-tighter leading-tight">
-                        {project.title}
-                     </h4>
-                     <p className="text-gray-500 text-lg md:text-xl font-light mb-10 leading-relaxed">
-                        Precision engineering and architectural excellence delivered in {project.location}.
-                     </p>
-                     
-                     <div className="flex flex-col sm:flex-row gap-4">
-                        <a href={project.pdf} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-black text-white font-black uppercase tracking-widest text-[10px] hover:bg-[#e4a11e] hover:text-black transition-all">
-                           Technical Specs <FaFilePdf />
-                        </a>
-                     </div>
-                  </div>
-               </motion.div>
-             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ==========================
-          SECTION 3: SITE VIDEOS
-      ========================== */}
-      <section className="py-24 md:py-40 bg-slate-50 relative overflow-hidden">
         <div className="container mx-auto px-6 relative z-10">
-          <div className="text-center mb-20">
-             <h2 className="text-sm font-bold text-[#e4a11e] uppercase tracking-[0.4em] mb-6">Live Operations</h2>
-             <h3 className="text-4xl md:text-6xl font-black text-black leading-tight uppercase tracking-tighter">
-               Site <span className="italic" style={{ color: primaryColor }}>Footage.</span>
+          
+          <div className="max-w-3xl mb-16 md:mb-24">
+             <h2 className="text-sm font-bold text-[#e4a11e] uppercase tracking-[0.4em] mb-4">Interactive Portfolio</h2>
+             <h3 className="text-3xl md:text-5xl font-black text-black leading-tight uppercase tracking-tighter">
+               Every Detail <br />
+               <span className="italic" style={{ color: primaryColor }}>Casted To Perfection.</span>
              </h3>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto">
-             {videos.map((video) => (
-               <motion.div
-                 key={video.id}
-                 initial={{ opacity: 0, scale: 0.95 }}
-                 whileInView={{ opacity: 1, scale: 1 }}
-                 viewport={{ once: true }}
-                 className="relative group aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl cursor-pointer"
-                 onClick={() => setSelectedVideo(video.src)}
-               >
-                  <video 
-                    src={video.src} 
-                    className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity"
-                    muted
-                    loop
-                    playsInline
-                    onMouseOver={(e) => e.target.play()}
-                    onMouseOut={(e) => { e.target.pause(); e.target.currentTime = 0; }}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                     <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white text-2xl group-hover:bg-[#e4a11e] group-hover:text-black transition-all">
-                        <FaPlay />
-                     </div>
+          <motion.div 
+            layout
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 auto-rows-max"
+          >
+            <AnimatePresence mode="popLayout">
+              {paginatedProjects.map((project, index) => (
+                <motion.div
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.5 }}
+                  className={`group relative overflow-hidden bg-black rounded-xl cursor-pointer ${getGridClasses(index)} shadow-xl hover:shadow-2xl border border-gray-100`}
+                  onClick={() => openLightbox(project)}
+                >
+                  {/* Background Media */}
+                  <div className="absolute inset-0 z-0">
+                    {project.type === 'video' ? (
+                      <div className="w-full h-full relative">
+                        <video 
+                          src={project.src}
+                          className="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-700"
+                          muted
+                          loop
+                          playsInline
+                        />
+                        {/* Static Overlay Play Icon */}
+                        <div className="absolute inset-0 flex items-center justify-center z-10">
+                          <div className="w-16 h-16 rounded-full bg-black/40 backdrop-blur-md border border-white/20 flex items-center justify-center text-white text-lg group-hover:bg-[#e4a11e] group-hover:text-black transition-all transform group-hover:scale-110">
+                            <FaPlay className="ml-1" />
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <img 
+                        src={project.src}
+                        alt={project.title}
+                        loading="lazy"
+                        className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+                      />
+                    )}
+                    {/* Shadow Gradient Bottom */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent group-hover:from-black/100 transition-all duration-500"></div>
                   </div>
-                  <div className="absolute bottom-6 left-6">
-                     <span className="text-[10px] font-black text-[#e4a11e] uppercase tracking-widest">Video Archive / {video.title}</span>
+
+                  {/* Top Metadata Tags */}
+                  <div className="absolute top-6 left-6 right-6 flex justify-between items-center z-10">
+                    <span className="text-[9px] font-mono text-[#e4a11e] tracking-widest bg-black/60 px-3 py-1.5 rounded-full border border-[#e4a11e]/20 backdrop-blur-sm uppercase">
+                      {project.id}
+                    </span>
+                    <span className="text-[9px] font-mono text-white/80 tracking-widest bg-black/40 px-3 py-1.5 rounded-full backdrop-blur-sm uppercase flex items-center gap-1.5">
+                      {project.type === 'video' ? <FaFilm className="text-yellow-500" /> : <FaExpand className="text-white/60" />}
+                      {project.category}
+                    </span>
                   </div>
-               </motion.div>
-             ))}
-          </div>
+
+                  {/* Hover Floating Technical Crosshairs */}
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-[0.05] transition-opacity duration-700 pointer-events-none scale-150 z-10">
+                     <FaDraftingCompass className="text-white text-9xl" />
+                  </div>
+
+                  {/* Left Active Line Marker */}
+                  <div className="absolute left-0 bottom-0 top-0 w-[3px] bg-[#e4a11e] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+
+          {/* PREMIUM PAGINATION SYSTEM */}
+          {totalPages > 1 && (
+            <div className="flex justify-center items-center gap-2 mt-16 md:mt-24 relative z-20">
+              <button
+                disabled={currentPage === 1}
+                onClick={() => {
+                  setCurrentPage(prev => Math.max(prev - 1, 1));
+                  window.scrollTo({ top: 350, behavior: 'smooth' });
+                }}
+                className={`w-12 h-12 rounded-full flex items-center justify-center border transition-all duration-300 ${
+                  currentPage === 1
+                    ? 'border-gray-100 text-gray-300 cursor-not-allowed'
+                    : 'border-gray-200 text-black hover:border-[#e4a11e] hover:bg-[#e4a11e] hover:text-black shadow-sm bg-white'
+                }`}
+              >
+                <FaChevronLeft className="text-xs" />
+              </button>
+
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => (
+                <button
+                  key={pageNumber}
+                  onClick={() => {
+                    setCurrentPage(pageNumber);
+                    window.scrollTo({ top: 350, behavior: 'smooth' });
+                  }}
+                  className={`w-12 h-12 rounded-full font-black text-xs transition-all duration-300 border ${
+                    currentPage === pageNumber
+                      ? 'bg-[#e4a11e] border-[#e4a11e] text-black shadow-lg shadow-yellow-500/10'
+                      : 'bg-white border-gray-100 text-gray-500 hover:border-gray-300 hover:text-black'
+                  }`}
+                >
+                  {String(pageNumber).padStart(2, '0')}
+                </button>
+              ))}
+
+              <button
+                disabled={currentPage === totalPages}
+                onClick={() => {
+                  setCurrentPage(prev => Math.min(prev + 1, totalPages));
+                  window.scrollTo({ top: 350, behavior: 'smooth' });
+                }}
+                className={`w-12 h-12 rounded-full flex items-center justify-center border transition-all duration-300 ${
+                  currentPage === totalPages
+                    ? 'border-gray-100 text-gray-300 cursor-not-allowed'
+                    : 'border-gray-200 text-black hover:border-[#e4a11e] hover:bg-[#e4a11e] hover:text-black shadow-sm bg-white'
+                }`}
+              >
+                <FaChevronRight className="text-xs" />
+              </button>
+            </div>
+          )}
+
+          {/* Empty State */}
+          {filteredProjects.length === 0 && (
+            <div className="text-center py-20 bg-slate-50 border border-gray-100 rounded-xl">
+               <FaDraftingCompass className="text-6xl text-gray-300 mx-auto mb-6 spin-slow" />
+               <p className="text-gray-400 font-bold uppercase tracking-widest text-xs">No matching projects found in this archive segment.</p>
+            </div>
+          )}
+
         </div>
       </section>
 
       {/* ==========================
-          SECTION 4: COMPLETE GALLERY
+          SECTION 3: HIGHLIGHT BANNER
       ========================== */}
-      <section className="py-24 md:py-40 bg-black text-white">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
-             <div>
-                <h2 className="text-sm font-bold text-[#e4a11e] uppercase tracking-[0.4em] mb-6">Comprehensive Archive</h2>
-                <h3 className="text-4xl md:text-7xl font-black mb-0 uppercase tracking-tighter">
-                  Every <span className="italic text-[#e4a11e]">Detail.</span>
-                </h3>
-             </div>
-             <p className="text-gray-500 max-w-sm text-right">A full visual documentation of our projects across various stages of completion.</p>
-          </div>
-
-          <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
-             {galleryImages.map((img, index) => (
-               <motion.div
-                 key={index}
-                 initial={{ opacity: 0, y: 20 }}
-                 whileInView={{ opacity: 1, y: 0 }}
-                 viewport={{ once: true }}
-                 transition={{ delay: (index % 10) * 0.05 }}
-                 className="relative group rounded-xl overflow-hidden bg-white/5 border border-white/5 cursor-pointer"
-                 onClick={() => openLightbox(img)}
-               >
-                  <img 
-                    src={img} 
-                    alt={`Gallery ${index}`} 
-                    className="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                  />
-                  <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors"></div>
-                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                     <FaDraftingCompass className="text-[#e4a11e]" />
-                  </div>
-               </motion.div>
-             ))}
-          </div>
+      <section className="py-24 bg-black text-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-full h-full opacity-5 pointer-events-none" 
+             style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, gray 1px, transparent 0)', backgroundSize: '40px 40px' }}>
+        </div>
+        
+        <div className="container mx-auto px-6 text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-5xl font-black mb-8 uppercase tracking-tighter">
+              Looking for a custom <span style={{ color: primaryColor }}>Architectural Plan?</span>
+            </h2>
+            <p className="text-gray-400 mb-12 max-w-2xl mx-auto text-lg font-light leading-relaxed">
+              We design premium elevations, structural engineering drawings, and complete architectural documents customized exactly to your land boundaries.
+            </p>
+            <Link 
+              to="/contact" 
+              className="inline-flex items-center gap-6 px-12 py-5 bg-[#e4a11e] text-black font-black uppercase tracking-[0.3em] text-sm hover:bg-white transition-all transform hover:-translate-y-1"
+            >
+              Consult with Our Team
+              <FaArrowRight />
+            </Link>
+          </motion.div>
         </div>
       </section>
 
-      {/* --- LIGHTBOX MODAL --- */}
+      {/* --- PREMIUM LIGHTBOX MODAL --- */}
       <AnimatePresence>
         {lightboxIndex !== null && (
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] bg-white flex flex-col"
+            className="fixed inset-0 z-[200] flex flex-col justify-between"
+            style={{ backgroundColor: '#000000' }}
             onClick={() => setLightboxIndex(null)}
           >
-            {/* Header */}
-            <div className="flex justify-between items-center p-6 md:p-10 z-10">
-               <h4 className="text-xs font-black uppercase tracking-[0.4em] text-gray-400">
-                  Project View / {mainProjects[lightboxIndex]?.title || "Detail Archive"}
-               </h4>
-               <div className="flex items-center gap-8">
-                  <span className="text-xs font-mono text-gray-300">
-                     {lightboxIndex + 1} of {allImages.length}
+             {/* Header */}
+             <div className="flex justify-between items-center p-6 md:p-8 z-10 bg-black/40 backdrop-blur-md border-b border-white/5">
+                <div>
+                  <span className="text-[10px] font-mono text-[#e4a11e] uppercase tracking-widest bg-black/60 px-3 py-1.5 rounded-full border border-yellow-500/20">
+                    {paginatedProjects[lightboxIndex]?.id}
                   </span>
-                  <button onClick={() => setLightboxIndex(null)} className="text-2xl text-black hover:text-[#e4a11e] transition-colors">
-                     <FaTimes />
-                  </button>
+                  <h4 className="text-sm font-black uppercase tracking-[0.2em] text-white mt-1.5">
+                     {paginatedProjects[lightboxIndex]?.category} segment
+                  </h4>
+                </div>
+                <div className="flex items-center gap-8">
+                   <span className="text-xs font-mono text-gray-500">
+                      {lightboxIndex + 1} of {paginatedProjects.length}
+                   </span>
+                   <button onClick={() => setLightboxIndex(null)} className="text-2xl text-white hover:text-[#e4a11e] transition-colors">
+                      <FaTimes />
+                   </button>
+                </div>
+             </div>
+
+             {/* Main Content Area */}
+             <div className="flex-grow flex items-center justify-center p-4 relative">
+                {/* Controls */}
+                <button 
+                  onClick={prevImage}
+                  className="absolute left-4 md:left-10 z-20 w-14 h-14 rounded-full border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:border-white transition-all bg-black/40 hover:bg-black/80"
+                >
+                   <FaChevronLeft />
+                </button>
+                <button 
+                  onClick={nextImage}
+                  className="absolute right-4 md:right-10 z-20 w-14 h-14 rounded-full border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:border-white transition-all bg-black/40 hover:bg-black/80"
+                >
+                   <FaChevronRight />
+                </button>
+
+                {/* Enlarged Media Container */}
+                <motion.div
+                  key={lightboxIndex}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.3 }}
+                  className="max-w-5xl max-h-[65vh] w-full flex items-center justify-center p-2"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                   {paginatedProjects[lightboxIndex]?.type === 'video' ? (
+                     <video
+                       src={paginatedProjects[lightboxIndex]?.src}
+                       className="max-h-[60vh] rounded-lg shadow-2xl border border-white/10"
+                       controls
+                       autoPlay
+                       playsInline
+                     />
+                   ) : (
+                     <img 
+                       src={paginatedProjects[lightboxIndex]?.src} 
+                       className="max-h-[60vh] max-w-full object-contain rounded-lg shadow-2xl border border-white/10 bg-black/50"
+                       alt="Enlarged Project"
+                     />
+                   )}
+                </motion.div>
+             </div>
+
+             {/* Footer Metadata */}
+             {paginatedProjects[lightboxIndex]?.pdf && (
+               <div className="p-8 text-center bg-black/40 border-t border-white/5 backdrop-blur-md">
+                  <a
+                    href={paginatedProjects[lightboxIndex]?.pdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-[#e4a11e] text-black font-black uppercase tracking-widest text-[10px] hover:bg-white transition-colors rounded-sm"
+                  >
+                    <FaFilePdf /> Download Technical Specifications Sheet
+                  </a>
                </div>
-            </div>
-
-            {/* Main Content */}
-            <div className="flex-grow flex items-center justify-center p-4 relative">
-               {/* Controls */}
-               <button 
-                 onClick={prevImage}
-                 className="absolute left-4 md:left-10 z-20 w-14 h-14 rounded-full border border-gray-100 flex items-center justify-center text-gray-300 hover:text-black hover:border-black transition-all"
-               >
-                  <FaChevronLeft />
-               </button>
-               <button 
-                 onClick={nextImage}
-                 className="absolute right-4 md:right-10 z-20 w-14 h-14 rounded-full border border-gray-100 flex items-center justify-center text-gray-300 hover:text-black hover:border-black transition-all"
-               >
-                  <FaChevronRight />
-               </button>
-
-               {/* Image */}
-               <motion.div
-                 key={lightboxIndex}
-                 initial={{ opacity: 0, scale: 0.9 }}
-                 animate={{ opacity: 1, scale: 1 }}
-                 exit={{ opacity: 0, scale: 0.9 }}
-                 transition={{ duration: 0.4 }}
-                 className="max-w-6xl max-h-[70vh] shadow-2xl rounded-2xl overflow-hidden"
-               >
-                  <img 
-                    src={allImages[lightboxIndex]} 
-                    className="w-full h-full object-contain bg-white"
-                    alt="Enlarged Project"
-                    onClick={(e) => e.stopPropagation()}
-                  />
-               </motion.div>
-            </div>
-
-            {/* Footer Metadata */}
-            <div className="p-10 text-center border-t border-gray-50">
-               <p className="text-[10px] font-black uppercase tracking-[0.5em] text-gray-300">The Graha Standard / Architectural Documentation</p>
-            </div>
+             )}
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Video Modal Overlay */}
-      <AnimatePresence>
-        {selectedVideo && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 md:p-20"
-            onClick={() => setSelectedVideo(null)}
-          >
-            <button className="absolute top-10 right-10 text-white text-3xl hover:text-[#e4a11e]">
-               <FaTimes />
-            </button>
-            <video 
-              src={selectedVideo} 
-              className="max-w-full max-h-full shadow-2xl rounded-lg"
-              controls
-              autoPlay
-              onClick={(e) => e.stopPropagation()}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <section className="py-20 bg-slate-50 border-t border-gray-100 text-center">
-         <h4 className="text-2xl md:text-4xl font-black text-black uppercase tracking-tighter mb-4">Building the Future, Preserving the Past.</h4>
-         <div className="w-16 h-1 bg-[#e4a11e] mx-auto mb-8"></div>
-         <p className="text-gray-400 font-bold uppercase tracking-[0.5em] text-[10px]">The Graha Standard / Complete Archive</p>
+      {/* bottom technical tagline */}
+      <section className="py-16 bg-slate-50 border-t border-gray-100 text-center">
+         <h4 className="text-xl md:text-3xl font-black text-black uppercase tracking-tighter mb-3">Engineering Landmarks Since 2020.</h4>
+         <div className="w-12 h-1 bg-[#e4a11e] mx-auto mb-6"></div>
+         <p className="text-gray-400 font-bold uppercase tracking-[0.5em] text-[9px]">The Graha Standard / Registered Construction Trademark</p>
       </section>
     </div>
   );
