@@ -274,7 +274,7 @@ const ContactPage = () => {
                {/* MAP SECTION */}
                <div className="mt-12 h-[300px] md:h-[400px] opacity-100 transition-all duration-700 shadow-2xl overflow-hidden rounded-sm border border-gray-100">
                   <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124611.8967918338!2d79.0322238491823!3d12.221295286591147!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bab070f6f874983%3A0xc3b0907d7f72439d!2sTiruvannamalai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1707123456789!5m2!1sen!2sin" 
+                    src="https://maps.google.com/maps?q=12.23724667734365,79.073083139956&z=17&hl=en&output=embed" 
                     className="w-full h-full border-0" 
                     allowFullScreen="" 
                     loading="lazy" 

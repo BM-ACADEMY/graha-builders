@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaBuilding, FaHome, FaCity, FaFilePdf, FaDraftingCompass, FaArrowRight, FaPlay, FaTimes, FaChevronLeft, FaChevronRight, FaMapMarkerAlt, FaExpand, FaFilm } from 'react-icons/fa';
+import { FaBuilding, FaHome, FaCity, FaFilePdf, FaDraftingCompass, FaArrowRight, FaPlay, FaTimes, FaChevronLeft, FaChevronRight, FaMapMarkerAlt, FaExpand, FaFilm, FaFilter } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 
@@ -66,15 +66,15 @@ const ProjectsPage = () => {
 
   // --- MINIMALIST PROJECT ASSETS ---
   const projectsData = [
-    { id: "PRJ-01", category: "exterior", type: "image", src: img3, pdf: "/src/assets/AshokHouse_Elevation01.pdf" },
-    { id: "PRJ-02", category: "exterior", type: "image", src: img5, pdf: "/src/assets/VimalNishitha_Elevation01.pdf" },
-    { id: "PRJ-03", category: "exterior", type: "image", src: img9, pdf: "/src/assets/ELEVATION TN.pdf" },
-    { id: "PRJ-04", category: "exterior", type: "image", src: img1 },
-    { id: "PRJ-05", category: "exterior", type: "image", src: img2 },
-    { id: "PRJ-06", category: "exterior", type: "image", src: img4 },
-    { id: "PRJ-07", category: "exterior", type: "image", src: img6 },
-    { id: "PRJ-08", category: "exterior", type: "image", src: img7 },
-    { id: "PRJ-09", category: "exterior", type: "image", src: img8 },
+    { id: "PRJ-01", category: "interior", type: "image", src: img3, pdf: "/src/assets/AshokHouse_Elevation01.pdf" },
+    { id: "PRJ-02", category: "interior", type: "image", src: img5, pdf: "/src/assets/VimalNishitha_Elevation01.pdf" },
+    { id: "PRJ-03", category: "interior", type: "image", src: img9, pdf: "/src/assets/ELEVATION TN.pdf" },
+    { id: "PRJ-04", category: "interior", type: "image", src: img1 },
+    { id: "PRJ-05", category: "interior", type: "image", src: img2 },
+    { id: "PRJ-06", category: "interior", type: "image", src: img4 },
+    { id: "PRJ-07", category: "interior", type: "image", src: img6 },
+    { id: "PRJ-08", category: "interior", type: "image", src: img7 },
+    { id: "PRJ-09", category: "interior", type: "image", src: img8 },
     { id: "PRJ-10", category: "interior", type: "image", src: img10 },
     { id: "PRJ-11", category: "interior", type: "image", src: img11 },
     { id: "PRJ-12", category: "interior", type: "image", src: img12 },
@@ -104,45 +104,28 @@ const ProjectsPage = () => {
     return project.category === selectedTab;
   });
 
-  // --- PAGINATION SYSTEM ---
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
-  const totalPages = Math.ceil(filteredProjects.length / itemsPerPage);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [selectedTab]);
-
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const paginatedProjects = filteredProjects.slice(startIndex, startIndex + itemsPerPage);
-
   const openLightbox = (projectItem) => {
-    const index = paginatedProjects.findIndex(p => p.id === projectItem.id);
+    const index = filteredProjects.findIndex(p => p.id === projectItem.id);
     setLightboxIndex(index);
   };
 
   const nextImage = (e) => {
     e.stopPropagation();
-    setLightboxIndex((prev) => (prev + 1) % paginatedProjects.length);
+    setLightboxIndex((prev) => (prev + 1) % filteredProjects.length);
   };
 
   const prevImage = (e) => {
     e.stopPropagation();
-    setLightboxIndex((prev) => (prev - 1 + paginatedProjects.length) % paginatedProjects.length);
+    setLightboxIndex((prev) => (prev - 1 + filteredProjects.length) % filteredProjects.length);
   };
 
-  // Dynamic Column Span Generator for An Asymmetric Designer Grid
-  const getGridClasses = (index) => {
-    // 2nd image and 3rd image asymmetric patterns (spanning 2 columns on desktop)
-    const pos = index % 4;
-    if (pos === 1 || pos === 2) {
-      return "md:col-span-2 h-[350px] md:h-[550px]";
-    }
-    return "md:col-span-1 h-[350px] md:h-[550px]";
+  // Clean Responsive Grid Styling
+  const getGridClasses = () => {
+    return "col-span-1 h-[300px] md:h-[400px]";
   };
 
   const tabs = [
-    { id: 'all', name: 'All Projects' },
+    { id: 'all', name: 'All' },
     { id: 'interior', name: 'Interior' },
     { id: 'exterior', name: 'Exterior' },
     { id: 'video', name: 'Video Logs' }
@@ -196,12 +179,34 @@ const ProjectsPage = () => {
 
         <div className="container mx-auto px-6 relative z-10">
           
-          <div className="max-w-3xl mb-16 md:mb-24">
-             <h2 className="text-sm font-bold text-[#e4a11e] uppercase tracking-[0.4em] mb-4">Interactive Portfolio</h2>
-             <h3 className="text-3xl md:text-5xl font-black text-black leading-tight uppercase tracking-tighter">
-               Every Detail <br />
-               <span className="italic" style={{ color: primaryColor }}>Casted To Perfection.</span>
-             </h3>
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-8">
+            <div className="max-w-3xl">
+               <h2 className="text-sm font-bold text-[#e4a11e] uppercase tracking-[0.4em] mb-4">Interactive Portfolio</h2>
+               <h3 className="text-3xl md:text-5xl font-black text-black leading-tight uppercase tracking-tighter">
+                 Every Detail <br />
+                 <span className="italic" style={{ color: primaryColor }}>Casted To Perfection.</span>
+               </h3>
+            </div>
+
+            {/* Filter Buttons */}
+            <div className="flex items-center gap-2 flex-wrap">
+              <div className="flex items-center gap-2 text-slate-400 font-bold uppercase tracking-widest text-[10px] mr-2">
+                <FaFilter className="text-slate-300 text-sm" /> FILTERS:
+              </div>
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setSelectedTab(tab.id)}
+                  className={`px-6 py-2.5 rounded-full font-bold uppercase tracking-wider text-[11px] transition-all duration-300 border ${
+                    selectedTab === tab.id
+                      ? 'bg-[#e4a11e] border-[#e4a11e] text-white shadow-md'
+                      : 'bg-white border-gray-200 text-slate-500 hover:border-gray-300 hover:text-slate-800'
+                  }`}
+                >
+                  {tab.name}
+                </button>
+              ))}
+            </div>
           </div>
 
           <motion.div 
@@ -209,7 +214,7 @@ const ProjectsPage = () => {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 auto-rows-max"
           >
             <AnimatePresence mode="popLayout">
-              {paginatedProjects.map((project, index) => (
+              {filteredProjects.map((project, index) => (
                 <motion.div
                   key={project.id}
                   layout
@@ -273,57 +278,7 @@ const ProjectsPage = () => {
             </AnimatePresence>
           </motion.div>
 
-          {/* PREMIUM PAGINATION SYSTEM */}
-          {totalPages > 1 && (
-            <div className="flex justify-center items-center gap-2 mt-16 md:mt-24 relative z-20">
-              <button
-                disabled={currentPage === 1}
-                onClick={() => {
-                  setCurrentPage(prev => Math.max(prev - 1, 1));
-                  window.scrollTo({ top: 350, behavior: 'smooth' });
-                }}
-                className={`w-12 h-12 rounded-full flex items-center justify-center border transition-all duration-300 ${
-                  currentPage === 1
-                    ? 'border-gray-100 text-gray-300 cursor-not-allowed'
-                    : 'border-gray-200 text-black hover:border-[#e4a11e] hover:bg-[#e4a11e] hover:text-black shadow-sm bg-white'
-                }`}
-              >
-                <FaChevronLeft className="text-xs" />
-              </button>
 
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => (
-                <button
-                  key={pageNumber}
-                  onClick={() => {
-                    setCurrentPage(pageNumber);
-                    window.scrollTo({ top: 350, behavior: 'smooth' });
-                  }}
-                  className={`w-12 h-12 rounded-full font-black text-xs transition-all duration-300 border ${
-                    currentPage === pageNumber
-                      ? 'bg-[#e4a11e] border-[#e4a11e] text-black shadow-lg shadow-yellow-500/10'
-                      : 'bg-white border-gray-100 text-gray-500 hover:border-gray-300 hover:text-black'
-                  }`}
-                >
-                  {String(pageNumber).padStart(2, '0')}
-                </button>
-              ))}
-
-              <button
-                disabled={currentPage === totalPages}
-                onClick={() => {
-                  setCurrentPage(prev => Math.min(prev + 1, totalPages));
-                  window.scrollTo({ top: 350, behavior: 'smooth' });
-                }}
-                className={`w-12 h-12 rounded-full flex items-center justify-center border transition-all duration-300 ${
-                  currentPage === totalPages
-                    ? 'border-gray-100 text-gray-300 cursor-not-allowed'
-                    : 'border-gray-200 text-black hover:border-[#e4a11e] hover:bg-[#e4a11e] hover:text-black shadow-sm bg-white'
-                }`}
-              >
-                <FaChevronRight className="text-xs" />
-              </button>
-            </div>
-          )}
 
           {/* Empty State */}
           {filteredProjects.length === 0 && (
@@ -382,15 +337,15 @@ const ProjectsPage = () => {
              <div className="flex justify-between items-center p-6 md:p-8 z-10 bg-black/40 backdrop-blur-md border-b border-white/5">
                 <div>
                   <span className="text-[10px] font-mono text-[#e4a11e] uppercase tracking-widest bg-black/60 px-3 py-1.5 rounded-full border border-yellow-500/20">
-                    {paginatedProjects[lightboxIndex]?.id}
+                    {filteredProjects[lightboxIndex]?.id}
                   </span>
                   <h4 className="text-sm font-black uppercase tracking-[0.2em] text-white mt-1.5">
-                     {paginatedProjects[lightboxIndex]?.category} segment
+                     {filteredProjects[lightboxIndex]?.category} segment
                   </h4>
                 </div>
                 <div className="flex items-center gap-8">
                    <span className="text-xs font-mono text-gray-500">
-                      {lightboxIndex + 1} of {paginatedProjects.length}
+                      {lightboxIndex + 1} of {filteredProjects.length}
                    </span>
                    <button onClick={() => setLightboxIndex(null)} className="text-2xl text-white hover:text-[#e4a11e] transition-colors">
                       <FaTimes />
@@ -424,9 +379,9 @@ const ProjectsPage = () => {
                   className="max-w-5xl max-h-[65vh] w-full flex items-center justify-center p-2"
                   onClick={(e) => e.stopPropagation()}
                 >
-                   {paginatedProjects[lightboxIndex]?.type === 'video' ? (
+                   {filteredProjects[lightboxIndex]?.type === 'video' ? (
                      <video
-                       src={paginatedProjects[lightboxIndex]?.src}
+                       src={filteredProjects[lightboxIndex]?.src}
                        className="max-h-[60vh] rounded-lg shadow-2xl border border-white/10"
                        controls
                        autoPlay
@@ -434,7 +389,7 @@ const ProjectsPage = () => {
                      />
                    ) : (
                      <img 
-                       src={paginatedProjects[lightboxIndex]?.src} 
+                       src={filteredProjects[lightboxIndex]?.src} 
                        className="max-h-[60vh] max-w-full object-contain rounded-lg shadow-2xl border border-white/10 bg-black/50"
                        alt="Enlarged Project"
                      />
@@ -443,10 +398,10 @@ const ProjectsPage = () => {
              </div>
 
              {/* Footer Metadata */}
-             {paginatedProjects[lightboxIndex]?.pdf && (
+             {filteredProjects[lightboxIndex]?.pdf && (
                <div className="p-8 text-center bg-black/40 border-t border-white/5 backdrop-blur-md">
                   <a
-                    href={paginatedProjects[lightboxIndex]?.pdf}
+                    href={filteredProjects[lightboxIndex]?.pdf}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-6 py-3 bg-[#e4a11e] text-black font-black uppercase tracking-widest text-[10px] hover:bg-white transition-colors rounded-sm"
