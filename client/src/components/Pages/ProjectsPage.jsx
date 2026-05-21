@@ -83,7 +83,6 @@ const ProjectsPage = () => {
     { id: "PRJ-15", category: "interior", type: "image", src: img15 },
     { id: "PRJ-16", category: "interior", type: "image", src: img16 },
     { id: "PRJ-17", category: "exterior", type: "image", src: img17 },
-    { id: "PRJ-18", category: "exterior", type: "image", src: img18 },
     { id: "PRJ-19", category: "exterior", type: "image", src: img19 },
     { id: "PRJ-20", category: "exterior", type: "image", src: img20 },
     { id: "PRJ-21", category: "exterior", type: "image", src: img21 },
