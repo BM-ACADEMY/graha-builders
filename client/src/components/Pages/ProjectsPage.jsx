@@ -83,18 +83,18 @@ const ProjectsPage = () => {
     { id: "PRJ-15", category: "interior", type: "image", src: img15 },
     { id: "PRJ-16", category: "interior", type: "image", src: img16 },
     { id: "PRJ-17", category: "exterior", type: "image", src: img17 },
-    { id: "PRJ-19", category: "exterior", type: "image", src: img19 },
-    { id: "PRJ-20", category: "exterior", type: "image", src: img20 },
-    { id: "PRJ-21", category: "exterior", type: "image", src: img21 },
-    { id: "PRJ-22", category: "exterior", type: "image", src: img22 },
-    { id: "PRJ-23", category: "video", type: "video", src: video1 },
-    { id: "PRJ-24", category: "video", type: "video", src: video2 },
-    { id: "PRJ-25", category: "exterior", type: "image", src: siteImg1 },
-    { id: "PRJ-26", category: "exterior", type: "image", src: siteImg2 },
-    { id: "PRJ-27", category: "exterior", type: "image", src: siteImg3 },
-    { id: "PRJ-28", category: "exterior", type: "image", src: siteImg4 },
-    { id: "PRJ-29", category: "exterior", type: "image", src: siteImg5 },
-    { id: "PRJ-30", category: "exterior", type: "image", src: siteImg6 }
+    { id: "PRJ-18", category: "exterior", type: "image", src: img19 },
+    { id: "PRJ-19", category: "exterior", type: "image", src: img20 },
+    { id: "PRJ-20", category: "exterior", type: "image", src: img21 },
+    { id: "PRJ-21", category: "exterior", type: "image", src: img22 },
+    { id: "PRJ-22", category: "video", type: "video", src: video1 },
+    { id: "PRJ-23", category: "video", type: "video", src: video2 },
+    { id: "PRJ-24", category: "exterior", type: "image", src: siteImg1 },
+    { id: "PRJ-25", category: "exterior", type: "image", src: siteImg2 },
+    { id: "PRJ-26", category: "exterior", type: "image", src: siteImg3 },
+    { id: "PRJ-27", category: "exterior", type: "image", src: siteImg4 },
+    { id: "PRJ-28", category: "exterior", type: "image", src: siteImg5 },
+    { id: "PRJ-29", category: "exterior", type: "image", src: siteImg6 }
   ];
 
   // --- FILTER SYSTEM ---
